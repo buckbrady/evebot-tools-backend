@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scheduler
+  labels:
+    app: scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scheduler
+  template:
+    metadata:
+      name: scheduler
+      labels:
+        app: scheduler
+    spec:
+      containers:
+        - name: scheduler
+          image: ghcr.io/buckbrady/evetools/scheduler:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "3333"
+            - name: REDIS_ADDR
+              value: redis-redis-ha-haproxy:6379
+            - name: QUEUE_REDIS_DB
+              value: "10"
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: evetools-secrets
+                  key: SENTRY_SCHEDULER
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: evetools-secrets
+                  key: MONGODB_URI
+            - name: ESI_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: evetools-secrets
+                  key: ESI_CLIENT_ID
+            - name: ESI_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: evetools-secrets
+                  key: ESI_SECRET_KEY
+      restartPolicy: Always

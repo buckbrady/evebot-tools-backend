@@ -32,6 +32,7 @@ func Run() {
 	mux := asynq.NewServeMux()
 
 	mux.HandleFunc(tasks.TypeCronJobEsiStatus, tasks.HandleCronJobStatusTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseTypes, tasks.HandleCronJobUniverseTypesTask)
 
 	if err := srv.Run(mux); err != nil {
 		log.Fatal().Msgf("could not run server: %v", err)
