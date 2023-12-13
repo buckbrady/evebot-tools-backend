@@ -5,7 +5,7 @@ go 1.21.4
 require (
 	github.com/antihax/goesi v0.0.0-20231202031403-498c84423fe8
 	github.com/getsentry/sentry-go v0.25.0
-	github.com/go-chi/chi v1.5.5
+	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-co-op/gocron v1.36.1
 	github.com/golang-module/carbon/v2 v2.2.14
 	github.com/gomodule/redigo v1.8.9
@@ -53,7 +53,6 @@ require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/smarty/assertions v1.15.0 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
-	github.com/steebchen/prisma-client-go v0.31.0 // indirect
 	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.1.2 // indirect
