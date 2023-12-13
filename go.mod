@@ -6,7 +6,7 @@ require (
 	github.com/antihax/goesi v0.0.0-20231202031403-498c84423fe8
 	github.com/getsentry/sentry-go v0.25.0
 	github.com/go-chi/chi v1.5.5
-	github.com/go-co-op/gocron v1.36.1
+	github.com/go-co-op/gocron v1.37.0
 	github.com/golang-module/carbon/v2 v2.2.14
 	github.com/gomodule/redigo v1.8.9
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79
