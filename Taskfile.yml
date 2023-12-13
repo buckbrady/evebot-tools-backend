@@ -3,3 +3,46 @@ tasks:
   test:
     cmds:
       - go test -v ./...
+
+  run:scheduler:
+    dotenv: [ '.env' ]
+    interactive: true
+    cmds:
+      - go run cmd/scheduler/main.go
+
+  run:worker:
+    dotenv: [ '.env' ]
+    interactive: true
+    cmds:
+      - go run cmd/worker/main.go
+
+  build:worker:
+    cmds:
+      - docker buildx build -f deployments/worker/Dockerfile --platform linux/amd64 -t ghcr.io/buckbrady/evetools/worker:latest --push .
+
+  build:scheduler:
+    cmds:
+      - docker buildx build -f deployments/scheduler/Dockerfile --platform linux/amd64 -t ghcr.io/buckbrady/evetools/scheduler:latest --push .
+
+  build:zkillsync:
+    cmds:
+      - docker buildx build -f deployments/zkillsync/Dockerfile --platform linux/amd64 -t ghcr.io/buckbrady/evetools/zkillsync:latest --push .
+
+  deploy:
+    cmds:
+      - kubectl apply -k deployments/scheduler
+      - kubectl apply -k deployments/worker
+      - kubectl apply -k deployments/zkillsync
+      - kubectl -n evetools rollout restart deployment scheduler
+      - kubectl -n evetools rollout restart deployment worker
+      - kubectl -n evetools rollout restart deployment zkillsync
+
+  mongo:manage:prod:
+    dotenv: [ '.env' ]
+    cmds:
+      - mongosh $MONGODB_URI_PROD --file ./scripts/manageIndexes.js
+
+  mongo:manage:dev:
+    dotenv: [ '.env' ]
+    cmds:
+      - mongosh $MONGODB_URI_DEV --file ./scripts/manageIndexes.js
