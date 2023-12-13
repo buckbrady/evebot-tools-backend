@@ -39,6 +39,12 @@ func startApi() {
 
 	})
 
+	r.Get("/universe/types", func(w http.ResponseWriter, r *http.Request) {
+		scheduleUniverseTypesJob()
+		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
+
+	})
+
 	log.Info().Msg("starting webserver")
 	err := apiServer.ListenAndServe()
 	if err != nil {
