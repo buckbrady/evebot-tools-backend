@@ -5,8 +5,8 @@ go 1.21.4
 require (
 	github.com/antihax/goesi v0.0.0-20231202031403-498c84423fe8
 	github.com/getsentry/sentry-go v0.25.0
-	github.com/go-chi/chi v4.1.2+incompatible
-	github.com/go-co-op/gocron v1.36.1
+	github.com/go-chi/chi v1.5.5
+	github.com/go-co-op/gocron v1.37.0
 	github.com/golang-module/carbon/v2 v2.2.14
 	github.com/gomodule/redigo v1.8.9
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79
@@ -59,13 +59,13 @@ require (
 	github.com/xdg-go/stringprep v1.0.4 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20181117223130-1be2e3e5546d // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	golang.org/x/crypto v0.12.0 // indirect
+	golang.org/x/crypto v0.14.0 // indirect
 	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 // indirect
 	golang.org/x/mod v0.12.0 // indirect
-	golang.org/x/net v0.14.0 // indirect
+	golang.org/x/net v0.17.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20211028175245-ba495a64dcb5 // indirect
 	golang.org/x/sync v0.3.0 // indirect
-	golang.org/x/sys v0.12.0 // indirect
+	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	golang.org/x/tools v0.12.1-0.20230815132531-74c255bcf846 // indirect
