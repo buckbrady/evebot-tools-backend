@@ -39,9 +39,6 @@ func Run() {
 	// Status Jobs
 	scheduleStatusJobs()
 
-	// Universe Jobs
-	_, err := scheduler.Register("10 21 * * *", scheduleUniverseTypesJob)
-
 	if err := scheduler.Run(); err != nil {
 		log.Fatal().Err(err)
 	}
