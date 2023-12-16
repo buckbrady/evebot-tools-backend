@@ -37,12 +37,22 @@ tasks:
       - kubectl -n evetools rollout restart deployment worker
       - kubectl -n evetools rollout restart deployment zkillsync
 
-  mongo:manage:prod:
+  db:migrate:dev:
     dotenv: [ '.env' ]
     cmds:
-      - mongosh $MONGODB_URI_PROD --file ./scripts/manageIndexes.js
+      - atlas schema apply --env local
 
-  mongo:manage:dev:
+  db:migrate:prod:
     dotenv: [ '.env' ]
     cmds:
-      - mongosh $MONGODB_URI_DEV --file ./scripts/manageIndexes.js
+      - atlas schema apply --env prod
+
+  db:inspect:
+    dotenv: [ '.env' ]
+    cmds:
+      - atlas schema inspect --env local --web
+
+  db:fmt:
+    dotenv: [ '.env' ]
+    cmds:
+      - atlas schema fmt
