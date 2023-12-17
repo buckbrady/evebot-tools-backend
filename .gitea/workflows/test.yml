@@ -16,14 +16,8 @@ jobs:
         image: redis
         ports:
           - 6379:6379
-      mongo:
-        image: mongo
-        ports:
-          - 27017:27017
-        env:
-          MONGO_INITDB_ROOT_USERNAME: evetools
-          MONGO_INITDB_ROOT_PASSWORD: evetools
-          MONGO_INITDB_DATABASE: evetools
+    env:
+      REDIS_ADDR: redis:6379
     steps:
       - uses: actions/checkout@v4
       - name: Set up Go 1.21.x

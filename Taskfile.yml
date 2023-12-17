@@ -56,3 +56,8 @@ tasks:
     dotenv: [ '.env' ]
     cmds:
       - atlas schema fmt
+
+  db:gen:
+    dotenv: [ '.env' ]
+    cmds:
+      - atlas schema gen --env local
