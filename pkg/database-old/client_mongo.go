@@ -1,4 +1,4 @@
-package database
+package database_old
 
 import (
 	"github.com/buckbrady/evebot-tools-backend/pkg/utils"

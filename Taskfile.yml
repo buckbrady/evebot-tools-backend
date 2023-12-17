@@ -60,4 +60,5 @@ tasks:
   db:gen:
     dotenv: [ '.env' ]
     cmds:
-      - atlas schema gen --env local
+      - go install gorm.io/gen/tools/gentool@latest
+      - gentool -c gen.tool
