@@ -30,7 +30,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     env:
-      REDIS_ADDR: redis:6379
+      REDIS_ADDR: localhost:6379
       DATABASE_DSN: "host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable TimeZone=UTC"
     steps:
       - uses: actions/checkout@v4
