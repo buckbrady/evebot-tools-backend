@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        app: [ zkillsync ]
+        app: [ zkillsync, worker, scheduler ]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -77,7 +77,7 @@ jobs:
       - deploy-db
     strategy:
       matrix:
-        app: [ zkillsync ]
+        app: [ zkillsync, worker, scheduler ]
     steps:
       - uses: actions/checkout@v4
         with:
