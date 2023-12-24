@@ -11,12 +11,12 @@ database:
   # query code file name, default: gen.go
   outFile :  ""
   # generate unit test for query code
-  withUnitTest  : false
+  withUnitTest  : true
   # generated model code's package name
   modelPkgName  : ""
   # generate with pointer when field is nullable
   fieldNullable : true
   # generate field with gorm index tag
-  fieldWithIndexTag : true
+  fieldWithIndexTag : false
   # generate field with gorm column type tag
   fieldWithTypeTag  : false

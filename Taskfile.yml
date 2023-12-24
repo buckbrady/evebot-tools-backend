@@ -74,4 +74,5 @@ tasks:
     dotenv: [ '.env' ]
     cmds:
       - go install gorm.io/gen/tools/gentool@latest
+      - rm -fr pkg/models pkg/database
       - gentool -c gen.tool

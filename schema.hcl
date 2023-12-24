@@ -5,7 +5,7 @@ schema "public" {
 table "server_status" {
   schema = schema.public
   column "id" {
-    type = bigint
+    type = bigserial
   }
   column "players" {
     type = int
@@ -84,6 +84,9 @@ table "killmail_victim" {
 table "killmail_attacker" {
   schema = schema.public
   column "id" {
+    type = bigserial
+  }
+  column "killmail_id" {
     type = bigint
   }
   column "character_id" {
@@ -113,15 +116,17 @@ table "killmail_attacker" {
   }
   column "weapon_type_id" {
     type = int
+    null = true
   }
   column "ship_type_id" {
     type = int
+    null = true
   }
   primary_key {
     columns = [column.id]
   }
   foreign_key "killmail_id" {
-    columns     = [column.id]
+    columns     = [column.killmail_id]
     ref_columns = [table.killmail.column.id]
     on_update   = CASCADE
     on_delete   = CASCADE
@@ -131,6 +136,9 @@ table "killmail_attacker" {
 table "killmail_item" {
   schema = schema.public
   column "id" {
+    type = bigserial
+  }
+  column "killmail_id" {
     type = bigint
   }
   column "type_id" {
@@ -154,7 +162,7 @@ table "killmail_item" {
     columns = [column.id]
   }
   foreign_key "killmail_id" {
-    columns     = [column.id]
+    columns     = [column.killmail_id]
     ref_columns = [table.killmail.column.id]
     on_update   = CASCADE
     on_delete   = CASCADE
@@ -208,7 +216,6 @@ table "universe_type" {
   }
   column "capacity" {
     type = float
-    null = true
   }
   column "graphic_id" {
     type = int
@@ -227,26 +234,21 @@ table "universe_type" {
   }
   column "mass" {
     type = float
-    null = true
   }
   column "packaged_volume" {
     type = float
-    null = true
   }
   column "portion_size" {
     type = int
-    null = true
   }
   column "published" {
     type = bool
   }
   column "radius" {
     type = float
-    null = true
   }
   column "volume" {
     type = float
-    null = true
   }
 
   primary_key {

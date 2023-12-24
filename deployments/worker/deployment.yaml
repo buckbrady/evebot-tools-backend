@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: worker
-          image: ghcr.io/buckbrady/evetools/worker:latest
-          imagePullPolicy: Always
+          image: container
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: 250m
@@ -30,16 +30,16 @@ spec:
               value: redis-redis-ha-haproxy:6379
             - name: QUEUE_REDIS_DB
               value: "10"
-            - name: SENTRY_DSN
+#            - name: SENTRY_DSN
+#              valueFrom:
+#                secretKeyRef:
+#                  name: evetools-secrets
+#                  key: SENTRY_WORKER
+            - name: DATABASE_DSN
               valueFrom:
                 secretKeyRef:
                   name: evetools-secrets
-                  key: SENTRY_WORKER
-            - name: MONGODB_URI
-              valueFrom:
-                secretKeyRef:
-                  name: evetools-secrets
-                  key: MONGODB_URI
+                  key: DATABASE_DSN
             - name: ESI_CLIENT_ID
               valueFrom:
                 secretKeyRef:
