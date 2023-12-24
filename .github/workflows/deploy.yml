@@ -63,7 +63,7 @@ jobs:
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
       - name: Deploy Atlas Migrations
-        uses: ariga/atlas-action/migrate/apply@v1
+        uses: ariga/atlas-action/migrate/apply@master
         with:
           url: ${{ secrets.DATABASE_URL }}
           dir: atlas://evebot

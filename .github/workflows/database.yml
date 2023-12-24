@@ -34,12 +34,12 @@ jobs:
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
       - run: atlas version
-      - uses: ariga/atlas-action/migrate/lint@v1
+      - uses: ariga/atlas-action/migrate/lint@master
         with:
           dir: 'file://migrations'
           dir-name: 'evebot' # The name of the project in Atlas Cloud
           dev-url: "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
-      - uses: ariga/atlas-action/migrate/push@v1
+      - uses: ariga/atlas-action/migrate/push@master
         if: github.ref == 'refs/heads/main'
         with:
           dir: 'file://migrations'
