@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  labels:
+    app: worker
+spec:
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      name: worker
+      labels:
+        app: worker
+    spec:
+      containers:
+        - name: worker
+          image: container
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+          env:
+            - name: REDIS_ADDR
+              value: redis-redis-ha-haproxy:6379
+            - name: QUEUE_REDIS_DB
+              value: "10"
+#            - name: SENTRY_DSN
+#              valueFrom:
+#                secretKeyRef:
+#                  name: evetools-secrets
+#                  key: SENTRY_WORKER
+            - name: DATABASE_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: evetools-secrets
+                  key: DATABASE_DSN
+            - name: ESI_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: evetools-secrets
+                  key: ESI_CLIENT_ID
+            - name: ESI_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: evetools-secrets
+                  key: ESI_SECRET_KEY
+      restartPolicy: Always

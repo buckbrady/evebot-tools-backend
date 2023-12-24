@@ -1,0 +1,5 @@
+namespace: evetools
+
+resources:
+  - deployment.yaml
+  - hpa.yaml

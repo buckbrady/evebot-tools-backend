@@ -1,0 +1,78 @@
+version: '3'
+tasks:
+  test:
+    cmds:
+      - go test -v ./...
+
+  run:scheduler:
+    dotenv: [ '.env' ]
+    interactive: true
+    cmds:
+      - go run cmd/scheduler/main.go
+
+  run:worker:
+    dotenv: [ '.env' ]
+    interactive: true
+    cmds:
+      - go run cmd/worker/main.go
+
+  build:worker:
+    cmds:
+      - docker buildx build -f deployments/worker/Dockerfile --platform linux/amd64 -t ghcr.io/buckbrady/evetools/worker:latest --push .
+
+  build:scheduler:
+    cmds:
+      - docker buildx build -f deployments/scheduler/Dockerfile --platform linux/amd64 -t ghcr.io/buckbrady/evetools/scheduler:latest --push .
+
+  build:zkillsync:
+    cmds:
+      - docker buildx build -f deployments/zkillsync/Dockerfile --platform linux/amd64 -t ghcr.io/buckbrady/evetools/zkillsync:latest --push .
+
+  deploy:
+    cmds:
+      - kubectl apply -k deployments/scheduler
+      - kubectl apply -k deployments/worker
+      - kubectl apply -k deployments/zkillsync
+      - kubectl -n evetools rollout restart deployment scheduler
+      - kubectl -n evetools rollout restart deployment worker
+      - kubectl -n evetools rollout restart deployment zkillsync
+
+  db:migrate:dev:
+    dotenv: [ '.env' ]
+    cmds:
+      - atlas schema apply --env dev
+
+  db:migrate:prod:
+    dotenv: [ '.env' ]
+    cmds:
+      - |
+        atlas schema apply \
+            --env prod \
+            --var pg_username=${PG_USERNAME} \
+            --var pg_password=${PG_PASSWORD} \
+            --var pg_host=${PG_HOST} \
+            --var pg_port=${PG_PORT} \
+            --var pg_db=${PG_DBNAME}\
+            --auto-approve
+
+  db:diff:
+    dotenv: [ '.env' ]
+    cmds:
+      - atlas schema diff --env local
+
+  db:inspect:
+    dotenv: [ '.env' ]
+    cmds:
+      - atlas schema inspect --env local --web
+
+  db:fmt:
+    dotenv: [ '.env' ]
+    cmds:
+      - atlas schema fmt
+
+  db:gen:
+    dotenv: [ '.env' ]
+    cmds:
+      - go install gorm.io/gen/tools/gentool@latest
+      - rm -fr pkg/models pkg/database
+      - gentool -c gen.tool

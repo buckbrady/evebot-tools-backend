@@ -1,0 +1,6 @@
+namespace: evetools
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - crons.yaml
