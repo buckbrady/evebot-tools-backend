@@ -6,4 +6,5 @@ namespace: evebot
 resources:
   - deployment.yaml
   - service.yaml
+  - service-monitor.yaml
 

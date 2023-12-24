@@ -28,4 +28,8 @@ spec:
               value: redis-redis-ha-haproxy:6379
             - name: REDIS_DB
               value: "10"
+            - name: ENABLE_METRICS_EXPORTER
+              value: "true"
+            - name: PROMETHEUS_ADDR
+              value: "http://192.168.0.2:9090"
       restartPolicy: Always
