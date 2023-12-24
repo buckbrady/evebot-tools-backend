@@ -930,7 +930,7 @@ table "universe_system_jump" {
   }
   column "timestamp" {
     type    = timestamptz
-    default = "now()"
+    default = sql("now()")
   }
   column "ship_jumps" {
     type = int
@@ -953,7 +953,7 @@ table "universe_system_kill" {
   }
   column "timestamp" {
     type    = timestamptz
-    default = "now()"
+    default = sql("now()")
   }
   column "ship_kills" {
     type = int
@@ -1097,7 +1097,7 @@ table "market_price" {
   }
   column "timestamp" {
     type    = timestamptz
-    default = "now()"
+    default = sql("now()")
   }
   primary_key {
     columns = [column.type_id, column.timestamp]
