@@ -37,7 +37,8 @@ jobs:
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
       - run: atlas version
-      - uses: ariga/atlas-action/migrate/lint@v0.2.8
+      - run: |
+
         with:
           dir: 'file://migrations'
           dir-name: 'evebot' # The name of the project in Atlas Cloud
