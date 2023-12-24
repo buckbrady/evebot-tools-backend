@@ -32,6 +32,9 @@ lint {
     match   = "^[a-z]+$"
     message = "must be lowercase"
   }
+  data_depend {
+    error = true
+  }
 }
 
 env "dev" {
