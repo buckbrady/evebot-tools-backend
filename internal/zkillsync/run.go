@@ -26,6 +26,8 @@ func init() {
 func Run() {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt)
+	sqlDB, _ := db.DB()
+	defer sqlDB.Close()
 	client := req.C()
 	for {
 		select {

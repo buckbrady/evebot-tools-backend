@@ -34,11 +34,11 @@ spec:
 #            - name: SENTRY_DSN
 #              valueFrom:
 #                secretKeyRef:
-#                  name: evetools-secrets
+#                  name: evebot-secret
 #                  key: SENTRY_ZKILLSYNC
             - name: DATABASE_DSN
               valueFrom:
                 secretKeyRef:
-                  name: evetools-secrets
+                  name: evebot-secret
                   key: DATABASE_DSN
       restartPolicy: Always
