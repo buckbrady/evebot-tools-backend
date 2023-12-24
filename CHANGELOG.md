@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.0...v1.0.1) (2023-12-24)
+
+
+### Bug Fixes
+
+* add query timeout to db queries ([#12](https://github.com/buckbrady/evebot-tools-backend/issues/12)) ([dcfdf8b](https://github.com/buckbrady/evebot-tools-backend/commit/dcfdf8b0b17925b905214c08917b2a76bbb1500c))
+* **tasks:** add check for bad typeID ([#14](https://github.com/buckbrady/evebot-tools-backend/issues/14)) ([d4affee](https://github.com/buckbrady/evebot-tools-backend/commit/d4affeeeef07a34bc4c8f4699a60e5c96833863b))
+
 ## 1.0.0 (2023-12-24)
 
 
