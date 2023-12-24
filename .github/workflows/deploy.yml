@@ -76,7 +76,7 @@ jobs:
       KUBECONFIG: /tmp/config.yaml
     needs:
       - build
-      - deploy-db
+#      - deploy-db
     strategy:
       matrix:
         app: [ zkillsync, worker, scheduler ]

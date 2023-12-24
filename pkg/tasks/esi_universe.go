@@ -44,12 +44,21 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
+	if p.TypeID <= 1 {
+		log.Error().Msg("invalid typeID")
+		return nil
+	}
 	data, _, err := esi.EVE.ESI.UniverseApi.GetUniverseTypesTypeId(context.Background(), p.TypeID, nil)
 	if err != nil {
 		return err
 	}
 
 	//log.Info().Any("typeID", data.TypeId).Msg("failed to find universe type record. creating new record")
+
+	if data.TypeId <= 1 {
+		log.Error().Msg("invalid typeID")
+		return nil
+	}
 
 	record := model.UniverseType{
 		ID:             data.TypeId,
