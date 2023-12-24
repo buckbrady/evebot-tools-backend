@@ -8,6 +8,9 @@ on:
     paths:
       - 'migrations/*'
 
+permissions:
+  pull-requests: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -30,16 +33,16 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install Atlas
-        uses: ariga/setup-atlas@master
+        uses: ariga/setup-atlas@v0.2.8
         with:
           cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
       - run: atlas version
-      - uses: ariga/atlas-action/migrate/lint@master
+      - uses: ariga/atlas-action/migrate/lint@v0.2.8
         with:
           dir: 'file://migrations'
           dir-name: 'evebot' # The name of the project in Atlas Cloud
           dev-url: "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
-      - uses: ariga/atlas-action/migrate/push@master
+      - uses: ariga/atlas-action/migrate/push@v0.2.8
         if: github.ref == 'refs/heads/main'
         with:
           dir: 'file://migrations'
