@@ -38,10 +38,10 @@ jobs:
         with:
           dir: 'file://migrations'
           dir-name: 'evebot' # The name of the project in Atlas Cloud
-          dev-url: "postgres://postgres:postgres@postgres:3306/dev"
+          dev-url: "postgres://postgres:postgres@localhost:5432/dev"
       - uses: ariga/atlas-action/migrate/push@v1
         if: github.ref == 'refs/heads/main'
         with:
           dir: 'file://migrations'
           dir-name: 'evebot'
-          dev-url: "postgres://postgres:postgres@postgres:3306/dev"
+          dev-url: "postgres://postgres:postgres@localhost:5432/dev"
