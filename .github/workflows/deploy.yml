@@ -1,0 +1,98 @@
+name: Deploy
+
+on:
+  push:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [ zkillsync ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/buckbrady/evebot/${{ matrix.app }}
+            git.homelab.monster/evebot/${{ matrix.app }}
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to Homelab Registry
+        uses: docker/login-action@v3
+        with:
+          registry: git.homelab.monster
+          username: ${{ secrets.GITEA_USERNAME }}
+          password: ${{ secrets.GITEA_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: deployments/${{ matrix.app }}/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+  deploy-db:
+    runs-on: self-hosted
+    if: github.event_name == 'release' && github.event.action == 'published'
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ariga/setup-atlas@master
+        with:
+          cloud-token: ${{ secrets.ATLAS_CLOUD_TOKEN }}
+      - name: Deploy Atlas Migrations
+        uses: ariga/atlas-action/migrate/apply@v1
+        with:
+          url: ${{ secrets.DATABASE_URL }}
+          dir: atlas://evebot
+  deploy-apps:
+    runs-on: self-hosted
+    if: github.event_name == 'release' && github.event.action == 'published'
+    env:
+      KUBECONFIG: /tmp/config.yaml
+    needs:
+      - build
+      - deploy-db
+    strategy:
+      matrix:
+        app: [ zkillsync ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: alexellis/arkade-get@master
+        with:
+          kubectl: latest
+          helm: latest
+          kustomize: latest
+      - name: Setup KUBECONFIG
+        run: |
+          echo ${{ secrets.K8S_CONFIG }} | base64 -d > /tmp/config.yaml
+      - name: Deploy to Kubernetes
+        run: |
+          cd deployments/${{ matrix.app }}
+          kustomize edit set image container=git.homelab.monster/evebot/${{ matrix.app }}:${{ github.event.release.tag_name }}
+          kustomize build . | kubectl apply -f -
+      

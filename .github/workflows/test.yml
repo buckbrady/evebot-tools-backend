@@ -1,0 +1,41 @@
+name: Unit Tests
+
+on:
+  push:
+    branches-ignore:
+      - release-please*
+  pull_request:
+    branches-ignore:
+      - release-please*
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+    env:
+      REDIS_ADDR: redis:6379
+      DATABASE_DSN: "host=postgres user=postgres password=postgres dbname=postgres port=5432 sslmode=disable TimeZone=UTC"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go 1.21.x
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21.x
+      - name: Install dependencies
+        run: go mod download
+      - name: Run tests
+        run: go test -v ./...
+      - name: Build Services
+        run: go build -o ./builds/ -v ./cmd/...
