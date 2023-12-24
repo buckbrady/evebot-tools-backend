@@ -67,8 +67,9 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 		Radius:         float64(data.Radius),
 		Volume:         float64(data.Volume),
 	}
-
-	err = database.Use(db).UniverseType.WithContext(ctx).Save(&record)
+	dbctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	err = database.Use(db).UniverseType.WithContext(dbctx).Save(&record)
 	if err != nil {
 		log.Err(err).Msg("failed to create universe type record")
 		return err
@@ -80,7 +81,9 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 			EffectID:  effect.EffectId,
 			IsDefault: effect.IsDefault,
 		}
-		err = database.Use(db).UniverseTypeDogmaEffect.WithContext(ctx).Save(&dogmaEffects)
+		dbctx1, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		err = database.Use(db).UniverseTypeDogmaEffect.WithContext(dbctx1).Save(&dogmaEffects)
 		if err != nil {
 			log.Err(err).Any("typeID", data.TypeId).Any("effectID", effect.EffectId).Msg("failed to create universe type dogma effect record")
 			return err
@@ -93,7 +96,9 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 			AttributeID: attribute.AttributeId,
 			Value:       float64(attribute.Value),
 		}
-		err = database.Use(db).UniverseTypeDogmaAttribute.WithContext(ctx).Save(&dogmaAttributes)
+		dbctx1, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		err = database.Use(db).UniverseTypeDogmaAttribute.WithContext(dbctx1).Save(&dogmaAttributes)
 		if err != nil {
 			log.Err(err).Any("typeID", data.TypeId).Any("attributeID", attribute.AttributeId).Msg("failed to create universe type dogma attribute record")
 			return err

@@ -33,21 +33,21 @@ spec:
 #            - name: SENTRY_DSN
 #              valueFrom:
 #                secretKeyRef:
-#                  name: evetools-secrets
+#                  name: evebot-secret
 #                  key: SENTRY_SCHEDULER
             - name: DATABASE_DSN
               valueFrom:
                 secretKeyRef:
-                  name: evetools-secrets
+                  name: evebot-secret
                   key: DATABASE_DSN
             - name: ESI_CLIENT_ID
               valueFrom:
                 secretKeyRef:
-                  name: evetools-secrets
+                  name: evebot-secret
                   key: ESI_CLIENT_ID
             - name: ESI_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: evetools-secrets
+                  name: evebot-secret
                   key: ESI_SECRET_KEY
       restartPolicy: Always

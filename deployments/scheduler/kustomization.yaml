@@ -1,6 +1,11 @@
-namespace: evetools
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: evebot
 
 resources:
-  - deployment.yaml
-  - service.yaml
-  - crons.yaml
+- deployment.yaml
+- service.yaml
+- crons.yaml
+
+

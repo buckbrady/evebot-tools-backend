@@ -15,7 +15,10 @@ func Run() {
 	redisDB, _ := strconv.Atoi(utils.GetEnv("QUEUE_REDIS_DB", "10"))
 	redisOpts := asynq.RedisClientOpt{Addr: utils.GetEnv("REDIS_ADDR", "localhost:6379"), DB: redisDB}
 
-	tasks.AddDB(utils.NewPGConn())
+	db := utils.NewPGConn()
+	sqlDB, _ := db.DB()
+	defer sqlDB.Close()
+	tasks.AddDB(db)
 
 	srv := asynq.NewServer(
 		redisOpts,
