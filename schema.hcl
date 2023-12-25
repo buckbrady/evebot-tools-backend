@@ -502,6 +502,9 @@ table "universe_bloodlines" {
   column "willpower" {
     type = int
   }
+  column "name" {
+    type = text
+  }
   primary_key {
     columns = [column.id]
   }
