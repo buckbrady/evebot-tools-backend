@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.4...v1.1.0) (2023-12-25)
+
+
+### Features
+
+* **task:** add universe graphics sync ([a1f841c](https://github.com/buckbrady/evebot-tools-backend/commit/a1f841cb830cc5be102ca716db2290076f678374))
+* **tasks:** add factions sync task ([6198ee6](https://github.com/buckbrady/evebot-tools-backend/commit/6198ee6d239e64a90a2a53b2831b699aa368918f))
+* **tasks:** add system jumps task ([159e1ef](https://github.com/buckbrady/evebot-tools-backend/commit/159e1efb0f5beb34ec755d979d41b58ac82af78c))
+* **tasks:** add system kills task ([de0caa8](https://github.com/buckbrady/evebot-tools-backend/commit/de0caa8a508cb5ac037dac533f8d21830c5c3758))
+* **tasks:** add universe categories task ([cf14e77](https://github.com/buckbrady/evebot-tools-backend/commit/cf14e77196dc8404a5ba49ff39cde68a358ebbc1))
+* **tasks:** add universe groups task ([cf14e77](https://github.com/buckbrady/evebot-tools-backend/commit/cf14e77196dc8404a5ba49ff39cde68a358ebbc1))
+
+
+### Bug Fixes
+
+* **scheduler:** add missing endpoints for new tasks ([5243097](https://github.com/buckbrady/evebot-tools-backend/commit/52430973f9d79edc7ea99f62290c0911f238c241))
+
 ## [1.0.4](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.3...v1.0.4) (2023-12-25)
 
 
