@@ -34,7 +34,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create status task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_STATUS_QUEUE.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.ESI_STANDARD.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -45,7 +45,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create races task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.ESI_BACKGROUND.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -56,7 +56,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create ancestries task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.ESI_BACKGROUND.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -67,7 +67,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create factions task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.ESI_BACKGROUND.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -78,7 +78,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create bloodlines task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.ESI_BACKGROUND.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})

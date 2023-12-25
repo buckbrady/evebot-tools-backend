@@ -35,10 +35,11 @@ func Run() {
 			Concurrency: currencyCount,
 			// Optionally specify multiple queues with different priority.
 			Queues: map[string]int{
-				tasks.ESI_STATUS_QUEUE.GetName():            tasks.ESI_STATUS_QUEUE.GetPriority(),
-				tasks.ESI_UNIVERSE_QUEUE.GetName():          tasks.ESI_UNIVERSE_QUEUE.GetPriority(),
-				tasks.ESI_UNIVERSE_REALTIME_QUEUE.GetName(): tasks.ESI_UNIVERSE_REALTIME_QUEUE.GetPriority(),
+				tasks.ESI_STANDARD.GetName():   tasks.ESI_STANDARD.GetPriority(),
+				tasks.ESI_BACKGROUND.GetName(): tasks.ESI_BACKGROUND.GetPriority(),
+				tasks.ESI_HIGH.GetName():       tasks.ESI_HIGH.GetPriority(),
 			},
+			StrictPriority: true,
 			// See the godoc for other configuration options
 		},
 	)

@@ -62,7 +62,7 @@ func HandleCronJobUniverseRegionsTask(ctx context.Context, t *asynq.Task) error 
 			log.Err(taskErr).Msgf("Failed to create universe constellation task: %d", cID)
 			return taskErr
 		}
-		entryIDCon, taskErr := queueClient.Enqueue(taskCon, ESI_UNIVERSE_QUEUE.GetQueue())
+		entryIDCon, taskErr := queueClient.Enqueue(taskCon, ESI_BACKGROUND.GetQueue())
 		if taskErr != nil {
 			log.Err(taskErr).Msgf("Failed to register universe constellation task: %d", cID)
 			return taskErr

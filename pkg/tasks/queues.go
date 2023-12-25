@@ -5,17 +5,10 @@ import (
 	"github.com/hibiken/asynq"
 )
 
-const (
-	QUEUE_PRIORITY_LOW    = 1
-	QUEUE_PRIORITY_NORMAL = 4
-	QUEUE_PRIORITY_HIGH   = 5
-)
-
 var (
-	ESI_STATUS_QUEUE            = GetQueueOpts("esi", "status", QUEUE_PRIORITY_NORMAL)
-	ESI_UNIVERSE_QUEUE          = GetQueueOpts("esi", "universe", QUEUE_PRIORITY_LOW)
-	ESI_MARKET_QUEUE            = GetQueueOpts("esi", "market", QUEUE_PRIORITY_HIGH)
-	ESI_UNIVERSE_REALTIME_QUEUE = GetQueueOpts("esi", "universe_realtime", QUEUE_PRIORITY_HIGH)
+	ESI_STANDARD   = GetQueueOpts("esi", "standard", 5)
+	ESI_BACKGROUND = GetQueueOpts("esi", "background", 1)
+	ESI_HIGH       = GetQueueOpts("esi", "high", 10)
 )
 
 type QueueOpts struct {
