@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.1...v1.0.2) (2023-12-25)
+
+
+### Bug Fixes
+
+* **database:** fix schema.hcl to use sql now() function as default ([#15](https://github.com/buckbrady/evebot-tools-backend/issues/15)) ([66aaeb3](https://github.com/buckbrady/evebot-tools-backend/commit/66aaeb35cf0a5def79bdef2e3b5a74bdac4e1c30))
+
 ## [1.0.1](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.0...v1.0.1) (2023-12-24)
 
 
