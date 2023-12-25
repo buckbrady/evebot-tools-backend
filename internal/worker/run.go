@@ -35,8 +35,9 @@ func Run() {
 			Concurrency: currencyCount,
 			// Optionally specify multiple queues with different priority.
 			Queues: map[string]int{
-				tasks.ESI_STATUS_QUEUE.GetName():   tasks.ESI_STATUS_QUEUE.GetPriority(),
-				tasks.ESI_UNIVERSE_QUEUE.GetName(): tasks.ESI_UNIVERSE_QUEUE.GetPriority(),
+				tasks.ESI_STATUS_QUEUE.GetName():            tasks.ESI_STATUS_QUEUE.GetPriority(),
+				tasks.ESI_UNIVERSE_QUEUE.GetName():          tasks.ESI_UNIVERSE_QUEUE.GetPriority(),
+				tasks.ESI_UNIVERSE_REALTIME_QUEUE.GetName(): tasks.ESI_UNIVERSE_REALTIME_QUEUE.GetPriority(),
 			},
 			// See the godoc for other configuration options
 		},
@@ -58,11 +59,11 @@ func Run() {
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseStars, tasks.HandleCronJobUniverseStarsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseAncestries, tasks.HandleCronJobUniverseAncestriesTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseBloodlines, tasks.HandleCronJobUniverseBloodlinesTask)
-	//mux.HandleFunc(tasks.TypeCronJobEsiUniverseFactions, tasks.HandleCronJobUniverseFactionsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseFactions, tasks.HandleCronJobUniverseFactionsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseRaces, tasks.HandleCronJobUniverseRacesTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseGraphics, tasks.HandleCronJobUniverseGraphicsTask)
-	//mux.HandleFunc(tasks.TypeCronJobEsiUniverseCategories, tasks.HandleCronJobUniverseCategoriesTask)
-	//mux.HandleFunc(tasks.TypeCronJobEsiUniverseGroups, tasks.HandleCronJobUniverseGroupsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseCategories, tasks.HandleCronJobUniverseCategoriesTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseGroups, tasks.HandleCronJobUniverseGroupsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseSystemJumps, tasks.HandleCronJobUniverseSystemJumpsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseSystemKills, tasks.HandleCronJobUniverseSystemKillsTask)
 

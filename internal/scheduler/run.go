@@ -43,11 +43,13 @@ func Run() {
 
 	// Status Jobs
 	scheduleStatusJobs()
+	// Universe Jobs
 	scheduleUniverseAncestriesJob()
 	scheduleUniverseBloodlinesJob()
 	scheduleUniverseSystemJumpsJob()
 	scheduleUniverseSystemKillsJob()
 	scheduleUniverseFactionsJob()
+	scheduleUniverseRacesJob()
 
 	if err := scheduler.Run(); err != nil {
 		log.Fatal().Err(err)
