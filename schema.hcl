@@ -332,12 +332,12 @@ table "universe_system" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "constellation_id" {
-#    columns     = [column.constellation_id]
-#    ref_columns = [table.universe_constellation.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "constellation_id" {
+  #    columns     = [column.constellation_id]
+  #    ref_columns = [table.universe_constellation.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 
 }
 
@@ -367,18 +367,18 @@ table "universe_planet" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "system_id" {
-#    columns     = [column.system_id]
-#    ref_columns = [table.universe_system.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
-#  foreign_key "type_id" {
-#    columns     = [column.type_id]
-#    ref_columns = [table.universe_type.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "system_id" {
+  #    columns     = [column.system_id]
+  #    ref_columns = [table.universe_system.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
+  #  foreign_key "type_id" {
+  #    columns     = [column.type_id]
+  #    ref_columns = [table.universe_type.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_moon" {
@@ -404,12 +404,12 @@ table "universe_moon" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "system" {
-#    columns     = [column.system_id]
-#    ref_columns = [table.universe_system.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "system" {
+  #    columns     = [column.system_id]
+  #    ref_columns = [table.universe_system.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_astroid_belt" {
@@ -435,12 +435,12 @@ table "universe_astroid_belt" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "system_id" {
-#    columns     = [column.system_id]
-#    ref_columns = [table.universe_system.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "system_id" {
+  #    columns     = [column.system_id]
+  #    ref_columns = [table.universe_system.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_ancestry" {
@@ -549,12 +549,12 @@ table "universe_constellation" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "region_id" {
-#    columns     = [column.region_id]
-#    ref_columns = [table.universe_region.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "region_id" {
+  #    columns     = [column.region_id]
+  #    ref_columns = [table.universe_region.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_faction" {
@@ -607,12 +607,12 @@ table "universe_faction" {
   #    on_update   = CASCADE
   #    on_delete   = CASCADE
   #  }
-#  foreign_key "solar_system_id" {
-#    columns     = [column.solar_system_id]
-#    ref_columns = [table.universe_system.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "solar_system_id" {
+  #    columns     = [column.solar_system_id]
+  #    ref_columns = [table.universe_system.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_graphics" {
@@ -667,12 +667,12 @@ table "universe_group" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "category_id" {
-#    columns     = [column.category_id]
-#    ref_columns = [table.universe_category.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "category_id" {
+  #    columns     = [column.category_id]
+  #    ref_columns = [table.universe_category.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_race" {
@@ -742,18 +742,18 @@ table "universe_stargate" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "destination_system_id" {
-#    columns     = [column.destination_system_id]
-#    ref_columns = [table.universe_system.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
-#  foreign_key "type_id" {
-#    columns     = [column.type_id]
-#    ref_columns = [table.universe_type.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "destination_system_id" {
+  #    columns     = [column.destination_system_id]
+  #    ref_columns = [table.universe_system.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
+  #  foreign_key "type_id" {
+  #    columns     = [column.type_id]
+  #    ref_columns = [table.universe_type.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_star" {
@@ -788,18 +788,18 @@ table "universe_star" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "solar_system_id" {
-#    columns     = [column.solar_system_id]
-#    ref_columns = [table.universe_system.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
-#  foreign_key "type_id" {
-#    columns     = [column.type_id]
-#    ref_columns = [table.universe_type.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "solar_system_id" {
+  #    columns     = [column.solar_system_id]
+  #    ref_columns = [table.universe_system.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
+  #  foreign_key "type_id" {
+  #    columns     = [column.type_id]
+  #    ref_columns = [table.universe_type.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_station" {
@@ -846,18 +846,18 @@ table "universe_station" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "system_id" {
-#    columns     = [column.system_id]
-#    ref_columns = [table.universe_system.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
-#  foreign_key "type_id" {
-#    columns     = [column.type_id]
-#    ref_columns = [table.universe_type.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "system_id" {
+  #    columns     = [column.system_id]
+  #    ref_columns = [table.universe_system.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
+  #  foreign_key "type_id" {
+  #    columns     = [column.type_id]
+  #    ref_columns = [table.universe_type.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_station_service" {
@@ -908,18 +908,18 @@ table "universe_structure" {
   primary_key {
     columns = [column.id]
   }
-#  foreign_key "solar_system_id" {
-#    columns     = [column.solar_system_id]
-#    ref_columns = [table.universe_system.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
-#  foreign_key "type_id" {
-#    columns     = [column.type_id]
-#    ref_columns = [table.universe_type.column.id]
-#    on_update   = CASCADE
-#    on_delete   = CASCADE
-#  }
+  #  foreign_key "solar_system_id" {
+  #    columns     = [column.solar_system_id]
+  #    ref_columns = [table.universe_system.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
+  #  foreign_key "type_id" {
+  #    columns     = [column.type_id]
+  #    ref_columns = [table.universe_type.column.id]
+  #    on_update   = CASCADE
+  #    on_delete   = CASCADE
+  #  }
 }
 
 table "universe_system_jump" {
