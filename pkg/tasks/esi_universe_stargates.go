@@ -6,7 +6,6 @@ import (
 	"github.com/buckbrady/evebot-tools-backend/pkg/database"
 	"github.com/buckbrady/evebot-tools-backend/pkg/esi"
 	"github.com/buckbrady/evebot-tools-backend/pkg/model"
-	"github.com/buckbrady/evebot-tools-backend/pkg/utils"
 	"github.com/hibiken/asynq"
 	"github.com/rs/zerolog/log"
 	"time"
@@ -59,9 +58,7 @@ func HandleCronJobUniverseStargatesTask(ctx context.Context, t *asynq.Task) erro
 		PositionY:             data.Position.Y,
 		PositionZ:             data.Position.Z,
 	}
-	dbctx, cancel := utils.NewDBCtx(ctx, 60)
-	defer cancel()
-	err = database.Use(db).UniverseStargate.WithContext(dbctx).Save(&record)
+	err = database.Use(db).UniverseStargate.WithContext(ctx).Save(&record)
 	if err != nil {
 		log.Err(err).Msg("failed to create universe stargate record")
 		return err

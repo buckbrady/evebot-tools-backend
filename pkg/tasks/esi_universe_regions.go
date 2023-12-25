@@ -6,7 +6,6 @@ import (
 	"github.com/buckbrady/evebot-tools-backend/pkg/database"
 	"github.com/buckbrady/evebot-tools-backend/pkg/esi"
 	"github.com/buckbrady/evebot-tools-backend/pkg/model"
-	"github.com/buckbrady/evebot-tools-backend/pkg/utils"
 	"github.com/rs/zerolog/log"
 
 	"github.com/hibiken/asynq"
@@ -58,9 +57,7 @@ func HandleCronJobUniverseRegionsTask(ctx context.Context, t *asynq.Task) error 
 		Description: data.Description,
 	}
 
-	dbctx, cancel := utils.NewDBCtx(ctx, 60)
-	defer cancel()
-	err = database.Use(db).UniverseRegion.WithContext(dbctx).Save(&record)
+	err = database.Use(db).UniverseRegion.WithContext(ctx).Save(&record)
 	if err != nil {
 		return err
 	}

@@ -6,7 +6,6 @@ import (
 	"github.com/buckbrady/evebot-tools-backend/pkg/database"
 	"github.com/buckbrady/evebot-tools-backend/pkg/esi"
 	"github.com/buckbrady/evebot-tools-backend/pkg/model"
-	"github.com/buckbrady/evebot-tools-backend/pkg/utils"
 	"github.com/hibiken/asynq"
 	"github.com/rs/zerolog/log"
 	"time"
@@ -60,9 +59,7 @@ func HandleCronJobUniverseStarsTask(ctx context.Context, t *asynq.Task) error {
 		SpectralClass: data.SpectralClass,
 		Temperature:   data.Temperature,
 	}
-	dbctx, cancel := utils.NewDBCtx(ctx, 60)
-	defer cancel()
-	err = database.Use(db).UniverseStar.WithContext(dbctx).Save(&record)
+	err = database.Use(db).UniverseStar.WithContext(ctx).Save(&record)
 	if err != nil {
 		return err
 	}

@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 	"github.com/buckbrady/evebot-tools-backend/pkg/database"
 	"github.com/buckbrady/evebot-tools-backend/pkg/model"
-	"github.com/buckbrady/evebot-tools-backend/pkg/utils"
-
 	//"github.com/buckbrady/evebot-tools-backend/pkg/database/models"
 	"github.com/buckbrady/evebot-tools-backend/pkg/esi"
 	"github.com/hibiken/asynq"
@@ -53,9 +51,7 @@ func HandleCronJobUniverseConstellationsTask(ctx context.Context, t *asynq.Task)
 		PositionY: data.Position.Y,
 		PositionZ: data.Position.Z,
 	}
-	dbctx, cancel := utils.NewDBCtx(ctx, 60)
-	defer cancel()
-	err = database.Use(db).UniverseConstellation.WithContext(dbctx).Save(&record)
+	err = database.Use(db).UniverseConstellation.WithContext(ctx).Save(&record)
 	if err != nil {
 		log.Err(err).Msg("failed to create universe constellation record")
 		return err
