@@ -8,15 +8,15 @@ const TableNameUniverseSystem = "universe_system"
 
 // UniverseSystem mapped from table <universe_system>
 type UniverseSystem struct {
-	ID              int32    `gorm:"column:id;primaryKey" json:"id"`
-	Name            string   `gorm:"column:name;not null" json:"name"`
-	SecurityClass   string   `gorm:"column:security_class;not null" json:"security_class"`
-	SecurityStatus  *float64 `gorm:"column:security_status" json:"security_status"`
-	ConstellationID *int32   `gorm:"column:constellation_id" json:"constellation_id"`
-	StarID          *int32   `gorm:"column:star_id" json:"star_id"`
-	PositionX       *float64 `gorm:"column:position_x" json:"position_x"`
-	PositionY       *float64 `gorm:"column:position_y" json:"position_y"`
-	PositionZ       *float64 `gorm:"column:position_z" json:"position_z"`
+	ID              int32   `gorm:"column:id;primaryKey" json:"id"`
+	Name            string  `gorm:"column:name;not null" json:"name"`
+	SecurityClass   string  `gorm:"column:security_class;not null" json:"security_class"`
+	SecurityStatus  float64 `gorm:"column:security_status;not null" json:"security_status"`
+	ConstellationID int32   `gorm:"column:constellation_id;not null" json:"constellation_id"`
+	StarID          int32   `gorm:"column:star_id;not null" json:"star_id"`
+	PositionX       float64 `gorm:"column:position_x;not null" json:"position_x"`
+	PositionY       float64 `gorm:"column:position_y;not null" json:"position_y"`
+	PositionZ       float64 `gorm:"column:position_z;not null" json:"position_z"`
 }
 
 // TableName UniverseSystem's table name

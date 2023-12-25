@@ -44,6 +44,11 @@ func startApi() {
 		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
 
 	})
+	r.Get("/universe/regions", func(w http.ResponseWriter, r *http.Request) {
+		scheduleUniverseRegionsJob()
+		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
+
+	})
 
 	log.Info().Msg("starting webserver")
 	err := apiServer.ListenAndServe()

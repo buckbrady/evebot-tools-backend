@@ -38,3 +38,22 @@ func scheduleUniverseTypesJob() {
 		log.Info().Any("entryID", entryID).Msgf("Registered universe type task: %d", t)
 	}
 }
+
+func scheduleUniverseRegionsJob() {
+	data, _, err := esi.EVE.ESI.UniverseApi.GetUniverseRegions(context.Background(), nil)
+	if err != nil {
+		log.Err(err).Msg("Failed to get universe regions")
+		return
+	}
+	for _, r := range data {
+		task, err := tasks.NewCronJobUniverseRegionsTask(r)
+		if err != nil {
+			log.Err(err).Msgf("Failed to create universe region task: %d", r)
+		}
+		entryID, err := queueClient.Enqueue(task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+		if err != nil {
+			log.Err(err).Msgf("Failed to register universe region task: %d", r)
+		}
+		log.Info().Any("entryID", entryID).Msgf("Registered universe region task: %d", r)
+	}
+}

@@ -13,7 +13,7 @@ const TableNameUniverseSystemJump = "universe_system_jump"
 // UniverseSystemJump mapped from table <universe_system_jump>
 type UniverseSystemJump struct {
 	SystemID  int32     `gorm:"column:system_id;primaryKey" json:"system_id"`
-	Timestamp time.Time `gorm:"column:timestamp;primaryKey;default:'2023-12-24 07:52:35.712546+00'::timestamp with time zone" json:"timestamp"`
+	Timestamp time.Time `gorm:"column:timestamp;primaryKey;default:now()" json:"timestamp"`
 	ShipJumps int32     `gorm:"column:ship_jumps;not null" json:"ship_jumps"`
 }
 

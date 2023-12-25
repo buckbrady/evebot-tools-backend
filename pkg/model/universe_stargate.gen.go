@@ -16,6 +16,7 @@ type UniverseStargate struct {
 	PositionY             float64 `gorm:"column:position_y;not null" json:"position_y"`
 	PositionZ             float64 `gorm:"column:position_z;not null" json:"position_z"`
 	TypeID                int32   `gorm:"column:type_id;not null" json:"type_id"`
+	SystemID              int32   `gorm:"column:system_id;not null" json:"system_id"`
 }
 
 // TableName UniverseStargate's table name

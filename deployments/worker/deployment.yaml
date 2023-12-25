@@ -50,4 +50,6 @@ spec:
                 secretKeyRef:
                   name: evebot-secret
                   key: ESI_SECRET_KEY
+            - name: WORKER_PROCS
+              value: "50"
       restartPolicy: Always
