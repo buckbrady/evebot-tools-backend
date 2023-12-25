@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.3...v1.0.4) (2023-12-25)
+
+
+### Bug Fixes
+
+* **tasks:** fix static value in constellations ([b43a500](https://github.com/buckbrady/evebot-tools-backend/commit/b43a500d987acabbf8ca56f15c35d2d0bab78d04))
+
 ## [1.0.3](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.2...v1.0.3) (2023-12-25)
 
 
