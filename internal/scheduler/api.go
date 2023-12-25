@@ -39,6 +39,28 @@ func startApi() {
 
 	})
 
+	r.Get("/universe/races", func(w http.ResponseWriter, r *http.Request) {
+		t, err := tasks.NewCronJubUniverseRacesTask()
+		if err != nil {
+			log.Err(err).Msg("failed to create races task")
+			return
+		}
+		task, err := queueClient.Enqueue(t, tasks.ESI_STATUS_QUEUE.GetQueue())
+		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
+
+	})
+
+	r.Get("/universe/ancestries", func(w http.ResponseWriter, r *http.Request) {
+		t, err := tasks.NewCronJobUniverseAncestriesTask()
+		if err != nil {
+			log.Err(err).Msg("failed to create ancestries task")
+			return
+		}
+		task, err := queueClient.Enqueue(t, tasks.ESI_STATUS_QUEUE.GetQueue())
+		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
+
+	})
+
 	r.Get("/universe/types", func(w http.ResponseWriter, r *http.Request) {
 		scheduleUniverseTypesJob()
 		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
