@@ -6,6 +6,5 @@ namespace: evebot
 resources:
 - deployment.yaml
 - service.yaml
-- crons.yaml
-
+- ingress.yaml
 
