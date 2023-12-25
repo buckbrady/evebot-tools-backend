@@ -56,6 +56,15 @@ func Run() {
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseAsteroidBelts, tasks.HandleCronJobUniverseAsteroidBeltsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseStations, tasks.HandleCronJobUniverseStationsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseStars, tasks.HandleCronJobUniverseStarsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseAncestries, tasks.HandleCronJobUniverseAncestriesTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseBloodlines, tasks.HandleCronJobUniverseBloodlinesTask)
+	//mux.HandleFunc(tasks.TypeCronJobEsiUniverseFactions, tasks.HandleCronJobUniverseFactionsTask)
+	//mux.HandleFunc(tasks.TypeCronJobEsiUniverseRaces, tasks.HandleCronJobUniverseRacesTask)
+	//mux.HandleFunc(tasks.TypeCronJobEsiUniverseGraphics, tasks.HandleCronJobUniverseGraphicsTask)
+	//mux.HandleFunc(tasks.TypeCronJobEsiUniverseCategories, tasks.HandleCronJobUniverseCategoriesTask)
+	//mux.HandleFunc(tasks.TypeCronJobEsiUniverseGroups, tasks.HandleCronJobUniverseGroupsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseSystemJumps, tasks.HandleCronJobUniverseSystemJumpsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseSystemKills, tasks.HandleCronJobUniverseSystemKillsTask)
 
 	if err := srv.Run(mux); err != nil {
 		log.Fatal().Msgf("could not run server: %v", err)

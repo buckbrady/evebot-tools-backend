@@ -37,6 +37,7 @@ func newUniverseBloodline(db *gorm.DB, opts ...gen.DOOption) universeBloodline {
 	_universeBloodline.Memory = field.NewInt32(tableName, "memory")
 	_universeBloodline.Perception = field.NewInt32(tableName, "perception")
 	_universeBloodline.Willpower = field.NewInt32(tableName, "willpower")
+	_universeBloodline.Name = field.NewString(tableName, "name")
 
 	_universeBloodline.fillFieldMap()
 
@@ -57,6 +58,7 @@ type universeBloodline struct {
 	Memory        field.Int32
 	Perception    field.Int32
 	Willpower     field.Int32
+	Name          field.String
 
 	fieldMap map[string]field.Expr
 }
@@ -83,6 +85,7 @@ func (u *universeBloodline) updateTableName(table string) *universeBloodline {
 	u.Memory = field.NewInt32(table, "memory")
 	u.Perception = field.NewInt32(table, "perception")
 	u.Willpower = field.NewInt32(table, "willpower")
+	u.Name = field.NewString(table, "name")
 
 	u.fillFieldMap()
 
@@ -111,7 +114,7 @@ func (u *universeBloodline) GetFieldByName(fieldName string) (field.OrderExpr, b
 }
 
 func (u *universeBloodline) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 10)
+	u.fieldMap = make(map[string]field.Expr, 11)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["corporation_id"] = u.CorporationID
 	u.fieldMap["description"] = u.Description
@@ -122,6 +125,7 @@ func (u *universeBloodline) fillFieldMap() {
 	u.fieldMap["memory"] = u.Memory
 	u.fieldMap["perception"] = u.Perception
 	u.fieldMap["willpower"] = u.Willpower
+	u.fieldMap["name"] = u.Name
 }
 
 func (u universeBloodline) clone(db *gorm.DB) universeBloodline {

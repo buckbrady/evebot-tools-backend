@@ -12,8 +12,10 @@ const (
 )
 
 var (
-	ESI_STATUS_QUEUE   = GetQueueOpts("esi", "status", QUEUE_PRIORITY_LOW)
-	ESI_UNIVERSE_QUEUE = GetQueueOpts("esi", "universe", QUEUE_PRIORITY_LOW)
+	ESI_STATUS_QUEUE            = GetQueueOpts("esi", "status", QUEUE_PRIORITY_NORMAL)
+	ESI_UNIVERSE_QUEUE          = GetQueueOpts("esi", "universe", QUEUE_PRIORITY_LOW)
+	ESI_MARKET_QUEUE            = GetQueueOpts("esi", "market", QUEUE_PRIORITY_HIGH)
+	ESI_UNIVERSE_REALTIME_QUEUE = GetQueueOpts("esi", "universe_realtime", QUEUE_PRIORITY_HIGH)
 )
 
 type QueueOpts struct {
