@@ -417,6 +417,9 @@ table "universe_astroid_belt" {
   column "id" {
     type = int
   }
+  column "name" {
+    type = text
+  }
   column "system_id" {
     type = int
   }
@@ -730,6 +733,9 @@ table "universe_stargate" {
   column "type_id" {
     type = int
   }
+  column "system_id" {
+    type = int
+  }
   primary_key {
     columns = [column.id]
   }
@@ -803,7 +809,6 @@ table "universe_station" {
   }
   column "owner" {
     type = int
-    null = true
   }
   column "max_dockable_ship_volume" {
     type = float
@@ -822,7 +827,6 @@ table "universe_station" {
   }
   column "race_id" {
     type = int
-    null = true
   }
   column "reprocessing_efficiency" {
     type = float

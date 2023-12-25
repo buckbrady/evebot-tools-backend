@@ -13,6 +13,7 @@ type UniverseAstroidBelt struct {
 	PositionX float64 `gorm:"column:position_x;not null" json:"position_x"`
 	PositionY float64 `gorm:"column:position_y;not null" json:"position_y"`
 	PositionZ float64 `gorm:"column:position_z;not null" json:"position_z"`
+	Name      string  `gorm:"column:name;not null" json:"name"`
 }
 
 // TableName UniverseAstroidBelt's table name

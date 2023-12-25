@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/buckbrady/evebot-tools-backend/pkg/database"
 	"github.com/buckbrady/evebot-tools-backend/pkg/model"
+	"github.com/buckbrady/evebot-tools-backend/pkg/utils"
 
 	//"github.com/buckbrady/evebot-tools-backend/pkg/database/models"
 	"github.com/buckbrady/evebot-tools-backend/pkg/esi"
@@ -76,7 +77,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 		Radius:         float64(data.Radius),
 		Volume:         float64(data.Volume),
 	}
-	dbctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	dbctx, cancel := utils.NewDBCtx(ctx, 60)
 	defer cancel()
 	err = database.Use(db).UniverseType.WithContext(dbctx).Save(&record)
 	if err != nil {
@@ -90,7 +91,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 			EffectID:  effect.EffectId,
 			IsDefault: effect.IsDefault,
 		}
-		dbctx1, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		dbctx1, cancel := context.WithTimeout(ctx, 60*time.Second)
 		defer cancel()
 		err = database.Use(db).UniverseTypeDogmaEffect.WithContext(dbctx1).Save(&dogmaEffects)
 		if err != nil {
@@ -105,7 +106,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 			AttributeID: attribute.AttributeId,
 			Value:       float64(attribute.Value),
 		}
-		dbctx1, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		dbctx1, cancel := context.WithTimeout(ctx, 60*time.Second)
 		defer cancel()
 		err = database.Use(db).UniverseTypeDogmaAttribute.WithContext(dbctx1).Save(&dogmaAttributes)
 		if err != nil {

@@ -57,7 +57,7 @@ func HandleCronJobUniverseRegionsTask(ctx context.Context, t *asynq.Task) error 
 		Description: data.Description,
 	}
 
-	dbctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	dbctx, cancel := utils.NewDBCtx(ctx, 60)
 	defer cancel()
 	err = database.Use(db).UniverseRegion.WithContext(dbctx).Save(&record)
 	if err != nil {
