@@ -57,3 +57,57 @@ func scheduleUniverseRegionsJob() {
 		log.Info().Any("entryID", entryID).Msgf("Registered universe region task: %d", r)
 	}
 }
+
+func scheduleUniverseAncestriesJob() {
+	task, err := tasks.NewCronJobUniverseAncestriesTask()
+	if err != nil {
+		log.Err(err).Msg("Failed to create universe ancestries task")
+		return
+	}
+	entryID, err := scheduler.Register("10 23 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+	if err != nil {
+		log.Err(err).Msg("Failed to register universe ancestries task")
+		return
+	}
+	log.Info().Any("entryID", entryID).Msg("Registered universe ancestries task")
+}
+
+func scheduleUniverseBloodlinesJob() {
+	task, err := tasks.NewCronJobUniverseBloodlinesTask()
+	if err != nil {
+		log.Err(err).Msg("Failed to create universe bloodlines task")
+		return
+	}
+	entryID, err := scheduler.Register("10 23 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+	if err != nil {
+		log.Err(err).Msg("Failed to register universe bloodlines task")
+		return
+	}
+	log.Info().Any("entryID", entryID).Msg("Registered universe bloodlines task")
+}
+
+func scheduleUniverseSystemJumpsJob() {
+	task, err := tasks.NewCronJobUniverseSystemJumpsTask()
+	if err != nil {
+		log.Err(err).Msg("failed to create system jumps task")
+	}
+	statusID, err := scheduler.Register("0 * * * *", task, tasks.ESI_UNIVERSE_REALTIME_QUEUE.GetQueue())
+	if err != nil {
+		log.Err(err).Msg("failed to register system jumps task")
+	} else {
+		log.Info().Str("entryID", statusID).Msg("registered system jumps task")
+	}
+}
+
+func scheduleUniverseSystemKillsJob() {
+	task, err := tasks.NewCronJobUniverseSystemKillsTask()
+	if err != nil {
+		log.Err(err).Msg("failed to create system kills task")
+	}
+	statusID, err := scheduler.Register("0 * * * *", task, tasks.ESI_UNIVERSE_REALTIME_QUEUE.GetQueue())
+	if err != nil {
+		log.Err(err).Msg("failed to register system kills task")
+	} else {
+		log.Info().Str("entryID", statusID).Msg("registered system kills task")
+	}
+}

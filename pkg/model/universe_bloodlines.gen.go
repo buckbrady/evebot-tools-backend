@@ -18,6 +18,7 @@ type UniverseBloodline struct {
 	Memory        int32  `gorm:"column:memory;not null" json:"memory"`
 	Perception    int32  `gorm:"column:perception;not null" json:"perception"`
 	Willpower     int32  `gorm:"column:willpower;not null" json:"willpower"`
+	Name          string `gorm:"column:name;not null" json:"name"`
 }
 
 // TableName UniverseBloodline's table name
