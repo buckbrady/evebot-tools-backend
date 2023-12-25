@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.2...v1.0.3) (2023-12-25)
+
+
+### Bug Fixes
+
+* fix bad ctx call ([1b4da4d](https://github.com/buckbrady/evebot-tools-backend/commit/1b4da4d797eb0644facc8c657ca2c2dd6e438ca2))
+* undo db query timeout ([#18](https://github.com/buckbrady/evebot-tools-backend/issues/18)) ([267a4f0](https://github.com/buckbrady/evebot-tools-backend/commit/267a4f0a975508f549fbf1bdeca2a606739c0dd3))
+
 ## [1.0.2](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.1...v1.0.2) (2023-12-25)
 
 
