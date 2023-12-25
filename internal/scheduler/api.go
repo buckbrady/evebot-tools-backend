@@ -45,7 +45,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create races task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_STATUS_QUEUE.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -56,7 +56,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create ancestries task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_STATUS_QUEUE.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -67,7 +67,18 @@ func startApi() {
 			log.Err(err).Msg("failed to create factions task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_STATUS_QUEUE.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
+
+	})
+
+	r.Get("/universe/bloodlines", func(w http.ResponseWriter, r *http.Request) {
+		t, err := tasks.NewCronJobUniverseBloodlinesTask()
+		if err != nil {
+			log.Err(err).Msg("failed to create bloodlines task")
+			return
+		}
+		task, err := queueClient.Enqueue(t, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -84,6 +95,11 @@ func startApi() {
 	})
 	r.Get("/universe/graphics", func(w http.ResponseWriter, r *http.Request) {
 		scheduleUniverseGraphicsJob()
+		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
+
+	})
+	r.Get("/universe/categories", func(w http.ResponseWriter, r *http.Request) {
+		scheduleUniverseCategoriesJob()
 		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
 
 	})

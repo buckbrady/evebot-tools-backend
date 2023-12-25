@@ -64,7 +64,7 @@ func scheduleUniverseAncestriesJob() {
 		log.Err(err).Msg("Failed to create universe ancestries task")
 		return
 	}
-	entryID, err := scheduler.Register("10 23 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+	entryID, err := scheduler.Register("10 11 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("Failed to register universe ancestries task")
 		return
@@ -78,7 +78,7 @@ func scheduleUniverseBloodlinesJob() {
 		log.Err(err).Msg("Failed to create universe bloodlines task")
 		return
 	}
-	entryID, err := scheduler.Register("10 23 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+	entryID, err := scheduler.Register("10 11 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("Failed to register universe bloodlines task")
 		return
@@ -136,10 +136,43 @@ func scheduleUniverseFactionsJob() {
 	if err != nil {
 		log.Err(err).Msg("failed to create system kills task")
 	}
-	statusID, err := scheduler.Register("20 23 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+	statusID, err := scheduler.Register("10 11 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("failed to register factions task")
 	} else {
 		log.Info().Str("entryID", statusID).Msg("registered factions task")
+	}
+}
+
+func scheduleUniverseRacesJob() {
+	task, err := tasks.NewCronJubUniverseRacesTask()
+	if err != nil {
+		log.Err(err).Msg("Failed to create universe races task")
+		return
+	}
+	entryID, err := scheduler.Register("10 11 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+	if err != nil {
+		log.Err(err).Msg("Failed to register universe races task")
+		return
+	}
+	log.Info().Any("entryID", entryID).Msg("Registered universe races task")
+}
+
+func scheduleUniverseCategoriesJob() {
+	data, _, err := esi.EVE.ESI.UniverseApi.GetUniverseCategories(context.Background(), nil)
+	if err != nil {
+		log.Err(err).Msg("Failed to get universe categories")
+		return
+	}
+	for _, r := range data {
+		task, err := tasks.NewCronJobUniverseCategoriesTask(r)
+		if err != nil {
+			log.Err(err).Msgf("Failed to create universe categories task: %d", r)
+		}
+		entryID, err := queueClient.Enqueue(task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+		if err != nil {
+			log.Err(err).Msgf("Failed to register universe categories task: %d", r)
+		}
+		log.Info().Any("entryID", entryID).Msgf("Registered universe categories task: %d", r)
 	}
 }
