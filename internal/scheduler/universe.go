@@ -111,3 +111,22 @@ func scheduleUniverseSystemKillsJob() {
 		log.Info().Str("entryID", statusID).Msg("registered system kills task")
 	}
 }
+
+func scheduleUniverseGraphicsJob() {
+	data, _, err := esi.EVE.ESI.UniverseApi.GetUniverseGraphics(context.Background(), nil)
+	if err != nil {
+		log.Err(err).Msg("Failed to get universe graphics")
+		return
+	}
+	for _, r := range data {
+		task, err := tasks.NewCronJobUniverseGraphicsTask(r)
+		if err != nil {
+			log.Err(err).Msgf("Failed to create universe graphics task: %d", r)
+		}
+		entryID, err := queueClient.Enqueue(task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+		if err != nil {
+			log.Err(err).Msgf("Failed to register universe graphics task: %d", r)
+		}
+		log.Info().Any("entryID", entryID).Msgf("Registered universe graphics task: %d", r)
+	}
+}
