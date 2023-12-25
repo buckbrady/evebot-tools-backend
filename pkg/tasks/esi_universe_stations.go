@@ -63,9 +63,7 @@ func HandleCronJobUniverseStationsTask(ctx context.Context, t *asynq.Task) error
 		TypeID:                   data.TypeId,
 	}
 
-	dbctx, cancel := utils.NewDBCtx(ctx, 60)
-	defer cancel()
-	err = database.Use(db).UniverseStation.WithContext(dbctx).Save(&record)
+	err = database.Use(db).UniverseStation.WithContext(ctx).Save(&record)
 	if err != nil {
 		return err
 	}
@@ -75,9 +73,9 @@ func HandleCronJobUniverseStationsTask(ctx context.Context, t *asynq.Task) error
 			StationID: data.StationId,
 			Service:   service,
 		}
-		dbctx, cancel := utils.NewDBCtx(ctx, 60)
+		ctx, cancel := utils.Newctx(ctx, 60)
 		defer cancel()
-		err = database.Use(db).UniverseStationService.WithContext(dbctx).Save(&record)
+		err = database.Use(db).UniverseStationService.WithContext(ctx).Save(&record)
 		if err != nil {
 			return err
 		}

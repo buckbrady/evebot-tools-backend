@@ -45,8 +45,8 @@ func HandleCronJobStatusTask(ctx context.Context, t *asynq.Task) error {
 		StartTime:     resp.StartTime,
 		Vip:           resp.Vip,
 	}
-	dbctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
-	err = database.Use(db).ServerStatus.WithContext(dbctx).Create(&record)
+	err = database.Use(db).ServerStatus.WithContext(ctx).Create(&record)
 	return err
 }

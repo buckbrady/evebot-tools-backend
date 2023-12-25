@@ -6,7 +6,6 @@ import (
 	"github.com/buckbrady/evebot-tools-backend/pkg/database"
 	"github.com/buckbrady/evebot-tools-backend/pkg/esi"
 	"github.com/buckbrady/evebot-tools-backend/pkg/model"
-	"github.com/buckbrady/evebot-tools-backend/pkg/utils"
 	"github.com/hibiken/asynq"
 	"github.com/rs/zerolog/log"
 	"time"
@@ -58,9 +57,7 @@ func HandleCronJobUniversePlanetsTask(ctx context.Context, t *asynq.Task) error 
 		PositionY: data.Position.Y,
 		PositionZ: data.Position.Z,
 	}
-	dbctx, cancel := utils.NewDBCtx(ctx, 60)
-	defer cancel()
-	err = database.Use(db).UniversePlanet.WithContext(dbctx).Save(&record)
+	err = database.Use(db).UniversePlanet.WithContext(ctx).Save(&record)
 	if err != nil {
 		return err
 	}
