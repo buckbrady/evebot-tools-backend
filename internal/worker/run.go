@@ -21,11 +21,16 @@ func Run() {
 	tasks.AddDB(db)
 	tasks.AddQueueClient(asynq.NewClient(redisOpts))
 
+	currencyCount, err := strconv.Atoi(utils.GetEnv("WORKER_PROCS", "25"))
+	if err != nil {
+		log.Fatal().Msgf("could not convert WORKER_PROCS to int: %v", err)
+	}
+
 	srv := asynq.NewServer(
 		redisOpts,
 		asynq.Config{
 			// Specify how many concurrent workers to use
-			Concurrency: 25,
+			Concurrency: currencyCount,
 			// Optionally specify multiple queues with different priority.
 			Queues: map[string]int{
 				tasks.ESI_STATUS_QUEUE.GetName():   tasks.ESI_STATUS_QUEUE.GetPriority(),
