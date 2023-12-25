@@ -9,6 +9,7 @@ var (
 	ESI_STANDARD   = GetQueueOpts("esi", "standard", 5)
 	ESI_BACKGROUND = GetQueueOpts("esi", "background", 1)
 	ESI_HIGH       = GetQueueOpts("esi", "high", 10)
+	ESI_REALTIME   = GetQueueOpts("esi", "realtime", 20)
 )
 
 type QueueOpts struct {
