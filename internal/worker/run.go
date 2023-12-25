@@ -38,6 +38,7 @@ func Run() {
 				tasks.ESI_STANDARD.GetName():   tasks.ESI_STANDARD.GetPriority(),
 				tasks.ESI_BACKGROUND.GetName(): tasks.ESI_BACKGROUND.GetPriority(),
 				tasks.ESI_HIGH.GetName():       tasks.ESI_HIGH.GetPriority(),
+				tasks.ESI_REALTIME.GetName():   tasks.ESI_REALTIME.GetPriority(),
 			},
 			StrictPriority: true,
 			// See the godoc for other configuration options
