@@ -8,9 +8,9 @@ const TableNameUniverseRegion = "universe_region"
 
 // UniverseRegion mapped from table <universe_region>
 type UniverseRegion struct {
-	ID          int32   `gorm:"column:id;primaryKey" json:"id"`
-	Name        string  `gorm:"column:name;not null" json:"name"`
-	Description *string `gorm:"column:description" json:"description"`
+	ID          int32  `gorm:"column:id;primaryKey" json:"id"`
+	Name        string `gorm:"column:name;not null" json:"name"`
+	Description string `gorm:"column:description;not null" json:"description"`
 }
 
 // TableName UniverseRegion's table name

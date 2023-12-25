@@ -15,7 +15,7 @@ type MarketPrice struct {
 	TypeID        int32     `gorm:"column:type_id;primaryKey" json:"type_id"`
 	AveragePrice  *float64  `gorm:"column:average_price" json:"average_price"`
 	AdjustedPrice *float64  `gorm:"column:adjusted_price" json:"adjusted_price"`
-	Timestamp     time.Time `gorm:"column:timestamp;primaryKey;default:'2023-12-24 07:52:35.525621+00'::timestamp with time zone" json:"timestamp"`
+	Timestamp     time.Time `gorm:"column:timestamp;primaryKey;default:now()" json:"timestamp"`
 }
 
 // TableName MarketPrice's table name

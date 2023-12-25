@@ -310,31 +310,24 @@ table "universe_system" {
   }
   column "security_class" {
     type = text
-
   }
   column "security_status" {
     type = float
-    null = true
   }
   column "constellation_id" {
     type = int
-    null = true
   }
   column "star_id" {
     type = int
-    null = true
   }
   column "position_x" {
     type = float
-    null = true
   }
   column "position_y" {
     type = float
-    null = true
   }
   column "position_z" {
     type = float
-    null = true
   }
   primary_key {
     columns = [column.id]
@@ -423,6 +416,9 @@ table "universe_astroid_belt" {
   schema = schema.public
   column "id" {
     type = int
+  }
+  column "name" {
+    type = text
   }
   column "system_id" {
     type = int
@@ -705,7 +701,6 @@ table "universe_region" {
   }
   column "description" {
     type = text
-    null = true
   }
   primary_key {
     columns = [column.id]
@@ -736,6 +731,9 @@ table "universe_stargate" {
     type = float
   }
   column "type_id" {
+    type = int
+  }
+  column "system_id" {
     type = int
   }
   primary_key {
@@ -811,7 +809,6 @@ table "universe_station" {
   }
   column "owner" {
     type = int
-    null = true
   }
   column "max_dockable_ship_volume" {
     type = float
@@ -830,7 +827,6 @@ table "universe_station" {
   }
   column "race_id" {
     type = int
-    null = true
   }
   column "reprocessing_efficiency" {
     type = float

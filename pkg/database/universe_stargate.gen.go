@@ -35,6 +35,7 @@ func newUniverseStargate(db *gorm.DB, opts ...gen.DOOption) universeStargate {
 	_universeStargate.PositionY = field.NewFloat64(tableName, "position_y")
 	_universeStargate.PositionZ = field.NewFloat64(tableName, "position_z")
 	_universeStargate.TypeID = field.NewInt32(tableName, "type_id")
+	_universeStargate.SystemID = field.NewInt32(tableName, "system_id")
 
 	_universeStargate.fillFieldMap()
 
@@ -53,6 +54,7 @@ type universeStargate struct {
 	PositionY             field.Float64
 	PositionZ             field.Float64
 	TypeID                field.Int32
+	SystemID              field.Int32
 
 	fieldMap map[string]field.Expr
 }
@@ -77,6 +79,7 @@ func (u *universeStargate) updateTableName(table string) *universeStargate {
 	u.PositionY = field.NewFloat64(table, "position_y")
 	u.PositionZ = field.NewFloat64(table, "position_z")
 	u.TypeID = field.NewInt32(table, "type_id")
+	u.SystemID = field.NewInt32(table, "system_id")
 
 	u.fillFieldMap()
 
@@ -105,7 +108,7 @@ func (u *universeStargate) GetFieldByName(fieldName string) (field.OrderExpr, bo
 }
 
 func (u *universeStargate) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 8)
+	u.fieldMap = make(map[string]field.Expr, 9)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["name"] = u.Name
 	u.fieldMap["destination_stargate_id"] = u.DestinationStargateID
@@ -114,6 +117,7 @@ func (u *universeStargate) fillFieldMap() {
 	u.fieldMap["position_y"] = u.PositionY
 	u.fieldMap["position_z"] = u.PositionZ
 	u.fieldMap["type_id"] = u.TypeID
+	u.fieldMap["system_id"] = u.SystemID
 }
 
 func (u universeStargate) clone(db *gorm.DB) universeStargate {

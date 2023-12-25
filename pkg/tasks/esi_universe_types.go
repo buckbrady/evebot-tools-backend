@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/buckbrady/evebot-tools-backend/pkg/database"
 	"github.com/buckbrady/evebot-tools-backend/pkg/model"
+	"github.com/buckbrady/evebot-tools-backend/pkg/utils"
 
 	//"github.com/buckbrady/evebot-tools-backend/pkg/database/models"
 	"github.com/buckbrady/evebot-tools-backend/pkg/esi"
@@ -28,7 +29,7 @@ type CronJobUniverseTypesPayload struct {
 func NewCronJobUniverseTypesTask(typeID int32) (*asynq.Task, error) {
 	payload, err := json.Marshal(CronJobUniverseTypesPayload{
 		Timestamp: time.Now().UTC(),
-		TTL:       30,
+		TTL:       86400,
 		TypeID:    typeID,
 	})
 	if err != nil {
@@ -44,7 +45,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
-	if p.TypeID <= 1 {
+	if p.TypeID < 1 {
 		log.Error().Msg("invalid typeID")
 		return nil
 	}
@@ -55,7 +56,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 
 	//log.Info().Any("typeID", data.TypeId).Msg("failed to find universe type record. creating new record")
 
-	if data.TypeId <= 1 {
+	if data.TypeId < 1 {
 		log.Error().Msg("invalid typeID")
 		return nil
 	}
@@ -76,7 +77,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 		Radius:         float64(data.Radius),
 		Volume:         float64(data.Volume),
 	}
-	dbctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	dbctx, cancel := utils.NewDBCtx(ctx, 60)
 	defer cancel()
 	err = database.Use(db).UniverseType.WithContext(dbctx).Save(&record)
 	if err != nil {
@@ -90,7 +91,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 			EffectID:  effect.EffectId,
 			IsDefault: effect.IsDefault,
 		}
-		dbctx1, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		dbctx1, cancel := context.WithTimeout(ctx, 60*time.Second)
 		defer cancel()
 		err = database.Use(db).UniverseTypeDogmaEffect.WithContext(dbctx1).Save(&dogmaEffects)
 		if err != nil {
@@ -105,7 +106,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 			AttributeID: attribute.AttributeId,
 			Value:       float64(attribute.Value),
 		}
-		dbctx1, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		dbctx1, cancel := context.WithTimeout(ctx, 60*time.Second)
 		defer cancel()
 		err = database.Use(db).UniverseTypeDogmaAttribute.WithContext(dbctx1).Save(&dogmaAttributes)
 		if err != nil {
