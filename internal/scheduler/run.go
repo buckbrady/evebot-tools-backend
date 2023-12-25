@@ -47,6 +47,7 @@ func Run() {
 	scheduleUniverseBloodlinesJob()
 	scheduleUniverseSystemJumpsJob()
 	scheduleUniverseSystemKillsJob()
+	scheduleUniverseFactionsJob()
 
 	if err := scheduler.Run(); err != nil {
 		log.Fatal().Err(err)

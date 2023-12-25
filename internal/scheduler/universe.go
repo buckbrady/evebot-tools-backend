@@ -130,3 +130,16 @@ func scheduleUniverseGraphicsJob() {
 		log.Info().Any("entryID", entryID).Msgf("Registered universe graphics task: %d", r)
 	}
 }
+
+func scheduleUniverseFactionsJob() {
+	task, err := tasks.NewCronJobUniverseFactionsTask()
+	if err != nil {
+		log.Err(err).Msg("failed to create system kills task")
+	}
+	statusID, err := scheduler.Register("20 23 * * *", task, tasks.ESI_UNIVERSE_QUEUE.GetQueue())
+	if err != nil {
+		log.Err(err).Msg("failed to register factions task")
+	} else {
+		log.Info().Str("entryID", statusID).Msg("registered factions task")
+	}
+}
