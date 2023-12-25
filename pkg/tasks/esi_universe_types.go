@@ -45,7 +45,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
-	if p.TypeID <= 1 {
+	if p.TypeID < 1 {
 		log.Error().Msg("invalid typeID")
 		return nil
 	}
@@ -56,7 +56,7 @@ func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
 
 	//log.Info().Any("typeID", data.TypeId).Msg("failed to find universe type record. creating new record")
 
-	if data.TypeId <= 1 {
+	if data.TypeId < 1 {
 		log.Error().Msg("invalid typeID")
 		return nil
 	}

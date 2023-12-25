@@ -33,7 +33,7 @@ func HandleCronJobUniverseStargatesTask(ctx context.Context, t *asynq.Task) erro
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
-	if p.TypeID <= 1 {
+	if p.TypeID < 1 {
 		log.Error().Msg("invalid typeID")
 		return nil
 	}
@@ -43,7 +43,7 @@ func HandleCronJobUniverseStargatesTask(ctx context.Context, t *asynq.Task) erro
 		return err
 	}
 
-	if data.StargateId <= 1 {
+	if data.StargateId < 1 {
 		log.Error().Msg("invalid stargateID")
 		return nil
 	}

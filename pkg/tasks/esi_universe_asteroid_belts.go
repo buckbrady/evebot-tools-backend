@@ -33,7 +33,7 @@ func HandleCronJobUniverseAsteroidBeltsTask(ctx context.Context, t *asynq.Task) 
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
-	if p.TypeID <= 1 {
+	if p.TypeID < 1 {
 		log.Error().Msg("invalid typeID")
 		return nil
 	}

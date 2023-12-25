@@ -48,6 +48,7 @@ func Run() {
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseMoons, tasks.HandleCronJobUniverseMoonsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseAsteroidBelts, tasks.HandleCronJobUniverseAsteroidBeltsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseStations, tasks.HandleCronJobUniverseStationsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseStars, tasks.HandleCronJobUniverseStarsTask)
 
 	if err := srv.Run(mux); err != nil {
 		log.Fatal().Msgf("could not run server: %v", err)

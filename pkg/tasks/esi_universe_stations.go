@@ -33,7 +33,7 @@ func HandleCronJobUniverseStationsTask(ctx context.Context, t *asynq.Task) error
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
-	if p.TypeID <= 1 {
+	if p.TypeID < 1 {
 		log.Error().Msg("invalid typeID")
 		return nil
 	}
@@ -42,7 +42,7 @@ func HandleCronJobUniverseStationsTask(ctx context.Context, t *asynq.Task) error
 		return err
 	}
 
-	if data.StationId <= 1 {
+	if data.StationId < 1 {
 		log.Error().Msg("invalid stationID")
 		return nil
 	}

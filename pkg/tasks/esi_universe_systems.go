@@ -58,6 +58,16 @@ func HandleCronJobUniverseSystemsTask(ctx context.Context, t *asynq.Task) error 
 		return err
 	}
 
+	taskStar, err := NewCronJobUniverseStarsTask(data.StarId)
+	if err != nil {
+		return err
+	}
+	entryIDStar, err := queueClient.Enqueue(taskStar, ESI_UNIVERSE_QUEUE.GetQueue())
+	if err != nil {
+		return err
+	}
+	log.Info().Any("entryID", entryIDStar).Any("starID", data.StarId).Msg("registered universe star task")
+
 	for _, planet := range data.Planets {
 		task, err := NewCronJobUniversePlanetsTask(planet.PlanetId)
 		if err != nil {

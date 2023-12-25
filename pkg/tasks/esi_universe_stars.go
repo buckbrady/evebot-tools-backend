@@ -13,10 +13,10 @@ import (
 )
 
 const (
-	TypeCronJobEsiUniversePlanets = "cronjob:esi:universe:planets"
+	TypeCronJobEsiUniverseStars = "cronjob:esi:universe:stars"
 )
 
-func NewCronJobUniversePlanetsTask(typeID int32) (*asynq.Task, error) {
+func NewCronJobUniverseStarsTask(typeID int32) (*asynq.Task, error) {
 	payload, err := json.Marshal(CronJobUniverseTypesPayload{
 		Timestamp: time.Now().UTC(),
 		TTL:       86400,
@@ -25,10 +25,10 @@ func NewCronJobUniversePlanetsTask(typeID int32) (*asynq.Task, error) {
 	if err != nil {
 		return nil, err
 	}
-	return asynq.NewTask(TypeCronJobEsiUniversePlanets, payload), nil
+	return asynq.NewTask(TypeCronJobEsiUniverseStars, payload), nil
 }
 
-func HandleCronJobUniversePlanetsTask(ctx context.Context, t *asynq.Task) error {
+func HandleCronJobUniverseStarsTask(ctx context.Context, t *asynq.Task) error {
 	var p CronJobUniverseTypesPayload
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
@@ -39,28 +39,30 @@ func HandleCronJobUniversePlanetsTask(ctx context.Context, t *asynq.Task) error 
 		return nil
 	}
 
-	data, _, err := esi.EVE.ESI.UniverseApi.GetUniversePlanetsPlanetId(context.Background(), p.TypeID, nil)
+	data, _, err := esi.EVE.ESI.UniverseApi.GetUniverseStarsStarId(context.Background(), p.TypeID, nil)
 	if err != nil {
 		return err
 	}
 
-	if data.PlanetId < 1 {
-		log.Error().Msg("invalid planetID")
+	if data.TypeId < 1 {
+		log.Error().Msg("invalid typeID")
 		return nil
 	}
 
-	record := model.UniversePlanet{
-		ID:        data.PlanetId,
-		Name:      data.Name,
-		SystemID:  data.SystemId,
-		TypeID:    data.TypeId,
-		PositionX: data.Position.X,
-		PositionY: data.Position.Y,
-		PositionZ: data.Position.Z,
+	record := model.UniverseStar{
+		ID:            p.TypeID,
+		Name:          data.Name,
+		SolarSystemID: data.SolarSystemId,
+		TypeID:        data.TypeId,
+		Age:           data.Age,
+		Luminosity:    float64(data.Luminosity),
+		Radius:        data.Radius,
+		SpectralClass: data.SpectralClass,
+		Temperature:   data.Temperature,
 	}
 	dbctx, cancel := utils.NewDBCtx(ctx, 60)
 	defer cancel()
-	err = database.Use(db).UniversePlanet.WithContext(dbctx).Save(&record)
+	err = database.Use(db).UniverseStar.WithContext(dbctx).Save(&record)
 	if err != nil {
 		return err
 	}
