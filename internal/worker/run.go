@@ -6,12 +6,14 @@ import (
 	"github.com/buckbrady/evebot-tools-backend/pkg/tasks"
 	"github.com/buckbrady/evebot-tools-backend/pkg/utils"
 	"github.com/hibiken/asynq"
+	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
 	"strconv"
 )
 
 func Run() {
+	zerolog.SetGlobalLevel(zerolog.ErrorLevel)
 	redisDB, _ := strconv.Atoi(utils.GetEnv("QUEUE_REDIS_DB", "10"))
 	redisOpts := asynq.RedisClientOpt{Addr: utils.GetEnv("REDIS_ADDR", "localhost:6379"), DB: redisDB}
 

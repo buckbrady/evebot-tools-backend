@@ -37,18 +37,10 @@ func HandleCronJobUniverseRegionsTask(ctx context.Context, t *asynq.Task) error 
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
-	if p.TypeID < 1 {
-		log.Error().Msg("invalid typeID")
-		return nil
-	}
+
 	data, _, err := esi.EVE.ESI.UniverseApi.GetUniverseRegionsRegionId(context.Background(), p.TypeID, nil)
 	if err != nil {
 		return err
-	}
-
-	if data.RegionId < 1 {
-		log.Error().Msg("invalid regionID")
-		return nil
 	}
 
 	record := model.UniverseRegion{
@@ -63,17 +55,19 @@ func HandleCronJobUniverseRegionsTask(ctx context.Context, t *asynq.Task) error 
 	}
 
 	for _, cID := range data.Constellations {
-		task, err := NewCronJobUnvierseConstellationsTask(cID)
-		if err != nil {
-			log.Err(err).Msgf("Failed to create universe constellation task: %d", cID)
-			return err
+		var taskCon *asynq.Task
+		var taskErr error
+		taskCon, taskErr = NewCronJobUnvierseConstellationsTask(cID)
+		if taskErr != nil {
+			log.Err(taskErr).Msgf("Failed to create universe constellation task: %d", cID)
+			return taskErr
 		}
-		entryID, err := queueClient.Enqueue(task, ESI_UNIVERSE_QUEUE.GetQueue())
-		if err != nil {
-			log.Err(err).Msgf("Failed to register universe constellation task: %d", cID)
-			return err
+		entryIDCon, taskErr := queueClient.Enqueue(taskCon, ESI_UNIVERSE_QUEUE.GetQueue())
+		if taskErr != nil {
+			log.Err(taskErr).Msgf("Failed to register universe constellation task: %d", cID)
+			return taskErr
 		}
-		log.Info().Any("entryID", entryID).Msgf("Registered universe constellation task: %d", cID)
+		log.Info().Any("entryID", entryIDCon).Msgf("Registered universe constellation task: %d", cID)
 	}
 	return nil
 }

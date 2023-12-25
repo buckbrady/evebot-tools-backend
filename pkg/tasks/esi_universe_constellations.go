@@ -38,7 +38,7 @@ func HandleCronJobUniverseConstellationsTask(ctx context.Context, t *asynq.Task)
 		return err
 	}
 
-	data, _, err := esi.EVE.ESI.UniverseApi.GetUniverseConstellationsConstellationId(context.Background(), 20000001, nil)
+	data, _, err := esi.EVE.ESI.UniverseApi.GetUniverseConstellationsConstellationId(context.Background(), p.TypeID, nil)
 	if err != nil {
 		return err
 	}

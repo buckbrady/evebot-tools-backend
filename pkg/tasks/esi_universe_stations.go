@@ -68,11 +68,11 @@ func HandleCronJobUniverseStationsTask(ctx context.Context, t *asynq.Task) error
 	}
 
 	for _, service := range data.Services {
-		record := model.UniverseStationService{
+		recordService := model.UniverseStationService{
 			StationID: data.StationId,
 			Service:   service,
 		}
-		err = database.Use(db).UniverseStationService.WithContext(ctx).Save(&record)
+		err = database.Use(db).UniverseStationService.WithContext(ctx).Save(&recordService)
 		if err != nil {
 			return err
 		}

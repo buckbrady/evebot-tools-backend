@@ -52,8 +52,7 @@ tasks:
             --var pg_password=${PG_PASSWORD} \
             --var pg_host=${PG_HOST} \
             --var pg_port=${PG_PORT} \
-            --var pg_db=${PG_DBNAME}\
-            --auto-approve
+            --var pg_db=${PG_DBNAME}
 
   db:diff:
     dotenv: [ '.env' ]
