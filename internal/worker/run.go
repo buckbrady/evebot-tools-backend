@@ -19,6 +19,7 @@ func Run() {
 	sqlDB, _ := db.DB()
 	defer sqlDB.Close()
 	tasks.AddDB(db)
+	tasks.AddQueueClient(asynq.NewClient(redisOpts))
 
 	srv := asynq.NewServer(
 		redisOpts,
@@ -35,8 +36,18 @@ func Run() {
 	)
 	mux := asynq.NewServeMux()
 
+	// ESI Status
 	mux.HandleFunc(tasks.TypeCronJobEsiStatus, tasks.HandleCronJobStatusTask)
+	// ESI Universe
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseTypes, tasks.HandleCronJobUniverseTypesTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseRegions, tasks.HandleCronJobUniverseRegionsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseConstellations, tasks.HandleCronJobUniverseConstellationsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseSystems, tasks.HandleCronJobUniverseSystemsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseStargates, tasks.HandleCronJobUniverseStargatesTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniversePlanets, tasks.HandleCronJobUniversePlanetsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseMoons, tasks.HandleCronJobUniverseMoonsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseAsteroidBelts, tasks.HandleCronJobUniverseAsteroidBeltsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiUniverseStations, tasks.HandleCronJobUniverseStationsTask)
 
 	if err := srv.Run(mux); err != nil {
 		log.Fatal().Msgf("could not run server: %v", err)

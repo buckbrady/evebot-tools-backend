@@ -28,7 +28,7 @@ type CronJobUniverseTypesPayload struct {
 func NewCronJobUniverseTypesTask(typeID int32) (*asynq.Task, error) {
 	payload, err := json.Marshal(CronJobUniverseTypesPayload{
 		Timestamp: time.Now().UTC(),
-		TTL:       30,
+		TTL:       86400,
 		TypeID:    typeID,
 	})
 	if err != nil {

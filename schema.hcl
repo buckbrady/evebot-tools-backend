@@ -310,31 +310,24 @@ table "universe_system" {
   }
   column "security_class" {
     type = text
-
   }
   column "security_status" {
     type = float
-    null = true
   }
   column "constellation_id" {
     type = int
-    null = true
   }
   column "star_id" {
     type = int
-    null = true
   }
   column "position_x" {
     type = float
-    null = true
   }
   column "position_y" {
     type = float
-    null = true
   }
   column "position_z" {
     type = float
-    null = true
   }
   primary_key {
     columns = [column.id]
@@ -705,7 +698,6 @@ table "universe_region" {
   }
   column "description" {
     type = text
-    null = true
   }
   primary_key {
     columns = [column.id]
