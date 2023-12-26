@@ -16,16 +16,10 @@ const (
 	TypeCronJobEsiUniverseTypes = "cronjob:esi:universe:types"
 )
 
-type CronJobUniverseTypesPayload struct {
-	Timestamp time.Time
-	TTL       int
-	TypeID    int32
-}
-
 // Tasks
 
 func NewCronJobUniverseTypesTask(typeID int32) (*asynq.Task, error) {
-	payload, err := json.Marshal(CronJobUniverseTypesPayload{
+	payload, err := json.Marshal(CronJobPayloadWithType{
 		Timestamp: time.Now().UTC(),
 		TTL:       86400,
 		TypeID:    typeID,
@@ -39,7 +33,7 @@ func NewCronJobUniverseTypesTask(typeID int32) (*asynq.Task, error) {
 // Handlers
 
 func HandleCronJobUniverseTypesTask(ctx context.Context, t *asynq.Task) error {
-	var p CronJobUniverseTypesPayload
+	var p CronJobPayloadWithType
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}

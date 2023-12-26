@@ -18,7 +18,7 @@ type MarketHistory struct {
 	Average    float64   `gorm:"column:average;not null" json:"average"`
 	Highest    float64   `gorm:"column:highest;not null" json:"highest"`
 	Lowest     float64   `gorm:"column:lowest;not null" json:"lowest"`
-	OrderCount int32     `gorm:"column:order_count;not null" json:"order_count"`
+	OrderCount int64     `gorm:"column:order_count;not null" json:"order_count"`
 	Volume     int64     `gorm:"column:volume;not null" json:"volume"`
 }
 

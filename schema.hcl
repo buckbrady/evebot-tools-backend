@@ -995,7 +995,7 @@ table "market_history" {
     type = float
   }
   column "order_count" {
-    type = int
+    type = bigint
   }
   column "volume" {
     type = bigint
@@ -1088,11 +1088,9 @@ table "market_price" {
   }
   column "average_price" {
     type = numeric
-    null = true
   }
   column "adjusted_price" {
     type = numeric
-    null = true
   }
   column "timestamp" {
     type    = timestamptz

@@ -33,7 +33,7 @@ func newMarketHistory(db *gorm.DB, opts ...gen.DOOption) marketHistory {
 	_marketHistory.Average = field.NewFloat64(tableName, "average")
 	_marketHistory.Highest = field.NewFloat64(tableName, "highest")
 	_marketHistory.Lowest = field.NewFloat64(tableName, "lowest")
-	_marketHistory.OrderCount = field.NewInt32(tableName, "order_count")
+	_marketHistory.OrderCount = field.NewInt64(tableName, "order_count")
 	_marketHistory.Volume = field.NewInt64(tableName, "volume")
 
 	_marketHistory.fillFieldMap()
@@ -51,7 +51,7 @@ type marketHistory struct {
 	Average    field.Float64
 	Highest    field.Float64
 	Lowest     field.Float64
-	OrderCount field.Int32
+	OrderCount field.Int64
 	Volume     field.Int64
 
 	fieldMap map[string]field.Expr
@@ -75,7 +75,7 @@ func (m *marketHistory) updateTableName(table string) *marketHistory {
 	m.Average = field.NewFloat64(table, "average")
 	m.Highest = field.NewFloat64(table, "highest")
 	m.Lowest = field.NewFloat64(table, "lowest")
-	m.OrderCount = field.NewInt32(table, "order_count")
+	m.OrderCount = field.NewInt64(table, "order_count")
 	m.Volume = field.NewInt64(table, "volume")
 
 	m.fillFieldMap()

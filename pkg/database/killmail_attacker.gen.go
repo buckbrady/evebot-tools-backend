@@ -28,6 +28,7 @@ func newKillmailAttacker(db *gorm.DB, opts ...gen.DOOption) killmailAttacker {
 	tableName := _killmailAttacker.killmailAttackerDo.TableName()
 	_killmailAttacker.ALL = field.NewAsterisk(tableName)
 	_killmailAttacker.ID = field.NewInt64(tableName, "id")
+	_killmailAttacker.KillmailID = field.NewInt64(tableName, "killmail_id")
 	_killmailAttacker.CharacterID = field.NewInt32(tableName, "character_id")
 	_killmailAttacker.CorporationID = field.NewInt32(tableName, "corporation_id")
 	_killmailAttacker.AllianceID = field.NewInt32(tableName, "alliance_id")
@@ -37,7 +38,6 @@ func newKillmailAttacker(db *gorm.DB, opts ...gen.DOOption) killmailAttacker {
 	_killmailAttacker.SecurityStatus = field.NewFloat64(tableName, "security_status")
 	_killmailAttacker.WeaponTypeID = field.NewInt32(tableName, "weapon_type_id")
 	_killmailAttacker.ShipTypeID = field.NewInt32(tableName, "ship_type_id")
-	_killmailAttacker.KillmailID = field.NewInt64(tableName, "killmail_id")
 
 	_killmailAttacker.fillFieldMap()
 
@@ -49,6 +49,7 @@ type killmailAttacker struct {
 
 	ALL            field.Asterisk
 	ID             field.Int64
+	KillmailID     field.Int64
 	CharacterID    field.Int32
 	CorporationID  field.Int32
 	AllianceID     field.Int32
@@ -58,7 +59,6 @@ type killmailAttacker struct {
 	SecurityStatus field.Float64
 	WeaponTypeID   field.Int32
 	ShipTypeID     field.Int32
-	KillmailID     field.Int64
 
 	fieldMap map[string]field.Expr
 }
@@ -76,6 +76,7 @@ func (k killmailAttacker) As(alias string) *killmailAttacker {
 func (k *killmailAttacker) updateTableName(table string) *killmailAttacker {
 	k.ALL = field.NewAsterisk(table)
 	k.ID = field.NewInt64(table, "id")
+	k.KillmailID = field.NewInt64(table, "killmail_id")
 	k.CharacterID = field.NewInt32(table, "character_id")
 	k.CorporationID = field.NewInt32(table, "corporation_id")
 	k.AllianceID = field.NewInt32(table, "alliance_id")
@@ -85,7 +86,6 @@ func (k *killmailAttacker) updateTableName(table string) *killmailAttacker {
 	k.SecurityStatus = field.NewFloat64(table, "security_status")
 	k.WeaponTypeID = field.NewInt32(table, "weapon_type_id")
 	k.ShipTypeID = field.NewInt32(table, "ship_type_id")
-	k.KillmailID = field.NewInt64(table, "killmail_id")
 
 	k.fillFieldMap()
 
@@ -116,6 +116,7 @@ func (k *killmailAttacker) GetFieldByName(fieldName string) (field.OrderExpr, bo
 func (k *killmailAttacker) fillFieldMap() {
 	k.fieldMap = make(map[string]field.Expr, 11)
 	k.fieldMap["id"] = k.ID
+	k.fieldMap["killmail_id"] = k.KillmailID
 	k.fieldMap["character_id"] = k.CharacterID
 	k.fieldMap["corporation_id"] = k.CorporationID
 	k.fieldMap["alliance_id"] = k.AllianceID
@@ -125,7 +126,6 @@ func (k *killmailAttacker) fillFieldMap() {
 	k.fieldMap["security_status"] = k.SecurityStatus
 	k.fieldMap["weapon_type_id"] = k.WeaponTypeID
 	k.fieldMap["ship_type_id"] = k.ShipTypeID
-	k.fieldMap["killmail_id"] = k.KillmailID
 }
 
 func (k killmailAttacker) clone(db *gorm.DB) killmailAttacker {
