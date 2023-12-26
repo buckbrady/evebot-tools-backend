@@ -28,11 +28,11 @@ func newUniverseAstroidBelt(db *gorm.DB, opts ...gen.DOOption) universeAstroidBe
 	tableName := _universeAstroidBelt.universeAstroidBeltDo.TableName()
 	_universeAstroidBelt.ALL = field.NewAsterisk(tableName)
 	_universeAstroidBelt.ID = field.NewInt32(tableName, "id")
+	_universeAstroidBelt.Name = field.NewString(tableName, "name")
 	_universeAstroidBelt.SystemID = field.NewInt32(tableName, "system_id")
 	_universeAstroidBelt.PositionX = field.NewFloat64(tableName, "position_x")
 	_universeAstroidBelt.PositionY = field.NewFloat64(tableName, "position_y")
 	_universeAstroidBelt.PositionZ = field.NewFloat64(tableName, "position_z")
-	_universeAstroidBelt.Name = field.NewString(tableName, "name")
 
 	_universeAstroidBelt.fillFieldMap()
 
@@ -44,11 +44,11 @@ type universeAstroidBelt struct {
 
 	ALL       field.Asterisk
 	ID        field.Int32
+	Name      field.String
 	SystemID  field.Int32
 	PositionX field.Float64
 	PositionY field.Float64
 	PositionZ field.Float64
-	Name      field.String
 
 	fieldMap map[string]field.Expr
 }
@@ -66,11 +66,11 @@ func (u universeAstroidBelt) As(alias string) *universeAstroidBelt {
 func (u *universeAstroidBelt) updateTableName(table string) *universeAstroidBelt {
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt32(table, "id")
+	u.Name = field.NewString(table, "name")
 	u.SystemID = field.NewInt32(table, "system_id")
 	u.PositionX = field.NewFloat64(table, "position_x")
 	u.PositionY = field.NewFloat64(table, "position_y")
 	u.PositionZ = field.NewFloat64(table, "position_z")
-	u.Name = field.NewString(table, "name")
 
 	u.fillFieldMap()
 
@@ -101,11 +101,11 @@ func (u *universeAstroidBelt) GetFieldByName(fieldName string) (field.OrderExpr,
 func (u *universeAstroidBelt) fillFieldMap() {
 	u.fieldMap = make(map[string]field.Expr, 6)
 	u.fieldMap["id"] = u.ID
+	u.fieldMap["name"] = u.Name
 	u.fieldMap["system_id"] = u.SystemID
 	u.fieldMap["position_x"] = u.PositionX
 	u.fieldMap["position_y"] = u.PositionY
 	u.fieldMap["position_z"] = u.PositionZ
-	u.fieldMap["name"] = u.Name
 }
 
 func (u universeAstroidBelt) clone(db *gorm.DB) universeAstroidBelt {

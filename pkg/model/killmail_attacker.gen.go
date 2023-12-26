@@ -9,6 +9,7 @@ const TableNameKillmailAttacker = "killmail_attacker"
 // KillmailAttacker mapped from table <killmail_attacker>
 type KillmailAttacker struct {
 	ID             int64   `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	KillmailID     int64   `gorm:"column:killmail_id;not null" json:"killmail_id"`
 	CharacterID    *int32  `gorm:"column:character_id" json:"character_id"`
 	CorporationID  *int32  `gorm:"column:corporation_id" json:"corporation_id"`
 	AllianceID     *int32  `gorm:"column:alliance_id" json:"alliance_id"`
@@ -18,7 +19,6 @@ type KillmailAttacker struct {
 	SecurityStatus float64 `gorm:"column:security_status;not null" json:"security_status"`
 	WeaponTypeID   *int32  `gorm:"column:weapon_type_id" json:"weapon_type_id"`
 	ShipTypeID     *int32  `gorm:"column:ship_type_id" json:"ship_type_id"`
-	KillmailID     int64   `gorm:"column:killmail_id;not null" json:"killmail_id"`
 }
 
 // TableName KillmailAttacker's table name

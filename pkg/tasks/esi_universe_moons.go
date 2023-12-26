@@ -16,7 +16,7 @@ const (
 )
 
 func NewCronJobUniverseMoonsTask(typeID int32) (*asynq.Task, error) {
-	payload, err := json.Marshal(CronJobUniverseTypesPayload{
+	payload, err := json.Marshal(CronJobPayloadWithType{
 		Timestamp: time.Now().UTC(),
 		TTL:       86400,
 		TypeID:    typeID,
@@ -28,7 +28,7 @@ func NewCronJobUniverseMoonsTask(typeID int32) (*asynq.Task, error) {
 }
 
 func HandleCronJobUniverseMoonsTask(ctx context.Context, t *asynq.Task) error {
-	var p CronJobUniverseTypesPayload
+	var p CronJobPayloadWithType
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}

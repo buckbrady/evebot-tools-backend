@@ -19,7 +19,7 @@ const (
 // Tasks
 
 func NewCronJobUnvierseConstellationsTask(id int32) (*asynq.Task, error) {
-	payload, err := json.Marshal(CronJobUniverseTypesPayload{
+	payload, err := json.Marshal(CronJobPayloadWithType{
 		Timestamp: time.Now().UTC(),
 		TTL:       86400,
 		TypeID:    id,
@@ -33,7 +33,7 @@ func NewCronJobUnvierseConstellationsTask(id int32) (*asynq.Task, error) {
 // Handlers
 
 func HandleCronJobUniverseConstellationsTask(ctx context.Context, t *asynq.Task) error {
-	var p CronJobUniverseTypesPayload
+	var p CronJobPayloadWithType
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}

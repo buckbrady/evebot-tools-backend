@@ -15,7 +15,7 @@ const (
 )
 
 func NewCronJobUniverseAncestriesTask() (*asynq.Task, error) {
-	payload, err := json.Marshal(CronJobUniverseTypesPayload{
+	payload, err := json.Marshal(CronJobPayloadWithType{
 		Timestamp: time.Now().UTC(),
 		TTL:       86400,
 	})

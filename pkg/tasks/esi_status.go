@@ -14,13 +14,8 @@ const (
 	TypeCronJobEsiStatus = "cronjob:esi:status"
 )
 
-type CronJobStatusPayload struct {
-	Timestamp time.Time
-	TTL       int
-}
-
 func NewCronJobStatusTask() (*asynq.Task, error) {
-	payload, err := json.Marshal(CronJobStatusPayload{
+	payload, err := json.Marshal(CronJobPayload{
 		Timestamp: time.Now().UTC(),
 		TTL:       30,
 	})
@@ -31,7 +26,7 @@ func NewCronJobStatusTask() (*asynq.Task, error) {
 }
 
 func HandleCronJobStatusTask(ctx context.Context, t *asynq.Task) error {
-	var p CronJobStatusPayload
+	var p CronJobPayload
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
@@ -45,8 +40,6 @@ func HandleCronJobStatusTask(ctx context.Context, t *asynq.Task) error {
 		StartTime:     resp.StartTime,
 		Vip:           resp.Vip,
 	}
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-	defer cancel()
 	err = database.Use(db).ServerStatus.WithContext(ctx).Create(&record)
 	return err
 }

@@ -13,8 +13,8 @@ const TableNameMarketPrice = "market_price"
 // MarketPrice mapped from table <market_price>
 type MarketPrice struct {
 	TypeID        int32     `gorm:"column:type_id;primaryKey" json:"type_id"`
-	AveragePrice  *float64  `gorm:"column:average_price" json:"average_price"`
-	AdjustedPrice *float64  `gorm:"column:adjusted_price" json:"adjusted_price"`
+	AveragePrice  float64   `gorm:"column:average_price;not null" json:"average_price"`
+	AdjustedPrice float64   `gorm:"column:adjusted_price;not null" json:"adjusted_price"`
 	Timestamp     time.Time `gorm:"column:timestamp;primaryKey;default:now()" json:"timestamp"`
 }
 

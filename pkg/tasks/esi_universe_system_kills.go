@@ -16,7 +16,7 @@ const (
 )
 
 func NewCronJobUniverseSystemKillsTask() (*asynq.Task, error) {
-	payload, err := json.Marshal(CronJobUniverseTypesPayload{
+	payload, err := json.Marshal(CronJobPayloadWithType{
 		Timestamp: time.Now().UTC(),
 		TTL:       3600,
 	})
@@ -27,7 +27,7 @@ func NewCronJobUniverseSystemKillsTask() (*asynq.Task, error) {
 }
 
 func HandleCronJobUniverseSystemKillsTask(ctx context.Context, t *asynq.Task) error {
-	var p CronJobUniverseTypesPayload
+	var p CronJobPayloadWithType
 	if err := json.Unmarshal(t.Payload(), &p); err != nil {
 		return err
 	}
