@@ -1058,6 +1058,13 @@ table "market_orders" {
   column "system_id" {
     type = int
   }
+  column "last_updated" {
+    type = timestamptz
+  }
+  column "is_active" {
+      type = bool
+    default = true
+  }
   primary_key {
     columns = [column.id]
   }

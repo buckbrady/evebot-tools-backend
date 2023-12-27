@@ -25,6 +25,8 @@ type MarketOrder struct {
 	Duration     int32     `gorm:"column:duration;not null" json:"duration"`
 	MinVolume    int32     `gorm:"column:min_volume;not null" json:"min_volume"`
 	SystemID     int32     `gorm:"column:system_id;not null" json:"system_id"`
+	LastUpdated  time.Time `gorm:"column:last_updated;not null" json:"last_updated"`
+	IsActive     bool      `gorm:"column:is_active;not null;default:true" json:"is_active"`
 }
 
 // TableName MarketOrder's table name

@@ -72,6 +72,7 @@ func Run() {
 	mux.HandleFunc(tasks.TypeCronJobEsiMarketGroups, tasks.HandleCronJobMarketGroupsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiMarketPrices, tasks.HandleCronJobMarketPricesTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiMarketHistory, tasks.HandleCronJobMarketHistoryTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiMarketOrders, tasks.HandleCronJobMarketOrdersTask)
 
 	if err := srv.Run(mux); err != nil {
 		log.Fatal().Msgf("could not run server: %v", err)
