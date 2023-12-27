@@ -111,12 +111,12 @@ func startApi() {
 
 	})
 	r.Get("/market/history", func(w http.ResponseWriter, r *http.Request) {
-		scheduleMarketHistoryTask()
+		scheduleMarketHistoryJob()
 		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
 
 	})
 	r.Get("/market/orders", func(w http.ResponseWriter, r *http.Request) {
-		scheduleMarketOrdersTask()
+		scheduleMarketOrdersJob()
 		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
 
 	})

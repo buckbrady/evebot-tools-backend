@@ -32,14 +32,14 @@ func scheduleMarketPricesJob() {
 	if err != nil {
 		log.Err(err).Msg("Failed to create market prices task")
 	}
-	entryID, err := scheduler.Register("0 * * * *", task, tasks.BACKGROUND_QUEUE.GetQueue())
+	entryID, err := scheduler.Register("0 * * * *", task, tasks.STANDARD_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("Failed to register market prices task")
 	}
 	log.Info().Any("entryID", entryID).Msg("Registered market prices task")
 }
 
-func scheduleMarketHistoryTask() {
+func scheduleMarketHistoryJob() {
 	regions, err := database.Use(db).UniverseRegion.WithContext(context.Background()).Find()
 	if err != nil {
 		log.Err(err).Msg("Failed to get universe regions")
@@ -68,7 +68,7 @@ func scheduleMarketHistoryTask() {
 	}
 }
 
-func scheduleMarketOrdersTask() {
+func scheduleMarketOrdersJob() {
 	regions, err := database.Use(db).UniverseRegion.WithContext(context.Background()).Find()
 	if err != nil {
 		log.Err(err).Msg("Failed to get universe regions")
