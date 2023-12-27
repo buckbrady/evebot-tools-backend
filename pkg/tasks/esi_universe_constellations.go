@@ -62,7 +62,7 @@ func HandleCronJobUniverseConstellationsTask(ctx context.Context, t *asynq.Task)
 		if err != nil {
 			log.Err(err).Msgf("Failed to create universe system task: %d", s)
 		}
-		entryID, err := queueClient.Enqueue(task, ESI_BACKGROUND.GetQueue())
+		entryID, err := queueClient.Enqueue(task, BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Msgf("Failed to register universe system task: %d", s)
 		}

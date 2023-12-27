@@ -9,3 +9,9 @@ const (
 func NewCronJobMarketOrdersTask(typeID int32, regionID int32) (*asynq.Task, error) {
 	return nil, nil
 }
+
+func HandleCronJobMarketOrdersTask() error {
+	return err
+
+	return nil
+}

@@ -31,7 +31,7 @@ func scheduleUniverseTypesJob() {
 		if err != nil {
 			log.Err(err).Msgf("Failed to create universe type task: %d", t)
 		}
-		entryID, err := queueClient.Enqueue(task, tasks.ESI_BACKGROUND.GetQueue())
+		entryID, err := queueClient.Enqueue(task, tasks.BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Msgf("Failed to register universe type task: %d", t)
 		}
@@ -50,7 +50,7 @@ func scheduleUniverseRegionsJob() {
 		if err != nil {
 			log.Err(err).Msgf("Failed to create universe region task: %d", r)
 		}
-		entryID, err := queueClient.Enqueue(task, tasks.ESI_BACKGROUND.GetQueue())
+		entryID, err := queueClient.Enqueue(task, tasks.BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Msgf("Failed to register universe region task: %d", r)
 		}
@@ -64,7 +64,7 @@ func scheduleUniverseAncestriesJob() {
 		log.Err(err).Msg("Failed to create universe ancestries task")
 		return
 	}
-	entryID, err := scheduler.Register("10 11 * * *", task, tasks.ESI_BACKGROUND.GetQueue())
+	entryID, err := scheduler.Register("10 11 * * *", task, tasks.BACKGROUND_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("Failed to register universe ancestries task")
 		return
@@ -78,7 +78,7 @@ func scheduleUniverseBloodlinesJob() {
 		log.Err(err).Msg("Failed to create universe bloodlines task")
 		return
 	}
-	entryID, err := scheduler.Register("10 11 * * *", task, tasks.ESI_BACKGROUND.GetQueue())
+	entryID, err := scheduler.Register("10 11 * * *", task, tasks.BACKGROUND_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("Failed to register universe bloodlines task")
 		return
@@ -91,7 +91,7 @@ func scheduleUniverseSystemJumpsJob() {
 	if err != nil {
 		log.Err(err).Msg("failed to create system jumps task")
 	}
-	statusID, err := scheduler.Register("0 * * * *", task, tasks.ESI_HIGH.GetQueue())
+	statusID, err := scheduler.Register("0 * * * *", task, tasks.CRITICAL_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("failed to register system jumps task")
 	} else {
@@ -104,7 +104,7 @@ func scheduleUniverseSystemKillsJob() {
 	if err != nil {
 		log.Err(err).Msg("failed to create system kills task")
 	}
-	statusID, err := scheduler.Register("0 * * * *", task, tasks.ESI_HIGH.GetQueue())
+	statusID, err := scheduler.Register("0 * * * *", task, tasks.CRITICAL_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("failed to register system kills task")
 	} else {
@@ -123,7 +123,7 @@ func scheduleUniverseGraphicsJob() {
 		if err != nil {
 			log.Err(err).Msgf("Failed to create universe graphics task: %d", r)
 		}
-		entryID, err := queueClient.Enqueue(task, tasks.ESI_BACKGROUND.GetQueue())
+		entryID, err := queueClient.Enqueue(task, tasks.BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Msgf("Failed to register universe graphics task: %d", r)
 		}
@@ -136,7 +136,7 @@ func scheduleUniverseFactionsJob() {
 	if err != nil {
 		log.Err(err).Msg("failed to create system kills task")
 	}
-	statusID, err := scheduler.Register("10 11 * * *", task, tasks.ESI_BACKGROUND.GetQueue())
+	statusID, err := scheduler.Register("10 11 * * *", task, tasks.BACKGROUND_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("failed to register factions task")
 	} else {
@@ -150,7 +150,7 @@ func scheduleUniverseRacesJob() {
 		log.Err(err).Msg("Failed to create universe races task")
 		return
 	}
-	entryID, err := scheduler.Register("10 11 * * *", task, tasks.ESI_BACKGROUND.GetQueue())
+	entryID, err := scheduler.Register("10 11 * * *", task, tasks.BACKGROUND_QUEUE.GetQueue())
 	if err != nil {
 		log.Err(err).Msg("Failed to register universe races task")
 		return
@@ -169,7 +169,7 @@ func scheduleUniverseCategoriesJob() {
 		if err != nil {
 			log.Err(err).Msgf("Failed to create universe categories task: %d", r)
 		}
-		entryID, err := queueClient.Enqueue(task, tasks.ESI_BACKGROUND.GetQueue())
+		entryID, err := queueClient.Enqueue(task, tasks.BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Msgf("Failed to register universe categories task: %d", r)
 		}

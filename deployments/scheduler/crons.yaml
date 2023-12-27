@@ -1,0 +1,253 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-universe-types
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/universe/types"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-universe-regions
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/universe/regions"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-universe-ancestries
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/universe/ancestries"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-universe-categories
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/universe/categories"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-universe-graphics
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/universe/graphics"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-universe-factions
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/universe/factions"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-universe-races
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/universe/races"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-universe-bloodlines
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/universe/bloodlines"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-market-groups
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/market/groups"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-market-history
+spec:
+  schedule: "10 11 * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/market/history"
+          restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trigger-market-orders
+spec:
+  schedule: "*/5 * * * *" #	Run @ 11:10PM UTC
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  timeZone: "Etc/UTC"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: trigger
+              image: quay.io/curl/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - curl
+                - "-vvv"
+                - "http://scheduler:3333/market/orders"
+          restartPolicy: Never

@@ -4,6 +4,9 @@ metadata:
   name: scheduler
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 300s
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 300s
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: 300s
 spec:
   ingressClassName: nginx
   rules:
