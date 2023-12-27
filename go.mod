@@ -6,7 +6,6 @@ require (
 	github.com/antihax/goesi v0.0.0-20231202031403-498c84423fe8
 	github.com/getsentry/sentry-go v0.25.0
 	github.com/go-chi/chi/v5 v5.0.11
-	github.com/go-co-op/gocron v1.37.0
 	github.com/golang-module/carbon/v2 v2.2.14
 	github.com/gomodule/redigo v1.8.9
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79
@@ -55,7 +54,6 @@ require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/smarty/assertions v1.15.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
-	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	golang.org/x/crypto v0.17.0 // indirect
 	golang.org/x/exp v0.0.0-20231219180239-dc181d75b848 // indirect
