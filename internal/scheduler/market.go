@@ -46,9 +46,6 @@ func scheduleMarketHistoryTask() {
 		return
 	}
 	for _, r := range regions {
-		// TODO: Schedule and Cache GetMarketsRegionIdTypes request
-		//  This is a lot of requests, need to set this up as a scheduled job and cache it for 600 seconds
-		//  labels: enchantment
 		types, _, err := esi.EVE.ESI.MarketApi.GetMarketsRegionIdTypes(context.Background(), r.ID, nil)
 		if err != nil {
 			log.Err(err).Msgf("Failed to get types for region: %d", r.ID)
