@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/buckbrady/evebot-tools-backend/compare/v1.1.0...v1.2.0) (2023-12-27)
+
+
+### Features
+
+* add market tasks ([ec1ef2a](https://github.com/buckbrady/evebot-tools-backend/commit/ec1ef2afaaa5b4f758e5957e8bf35035b2dbdff6))
+* **tasks:** add realtime queue ([5d7bc26](https://github.com/buckbrady/evebot-tools-backend/commit/5d7bc2690f5f445359fc577617326a369848d82e))
+* **tasks:** enable strict queue ([2b29c01](https://github.com/buckbrady/evebot-tools-backend/commit/2b29c0190d9db4bca9dd2cd9b0c78a7189e38432))
+
 ## [1.1.0](https://github.com/buckbrady/evebot-tools-backend/compare/v1.0.4...v1.1.0) (2023-12-25)
 
 
