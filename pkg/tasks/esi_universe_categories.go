@@ -58,7 +58,7 @@ func HandleCronJobUniverseCategoriesTask(ctx context.Context, t *asynq.Task) err
 		if taskErr != nil {
 			return taskErr
 		}
-		entityID, err := queueClient.Enqueue(taskGroup, ESI_BACKGROUND.GetQueue())
+		entityID, err := queueClient.Enqueue(taskGroup, BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Any("groupID", group).Msg("failed to enqueue group task")
 		}

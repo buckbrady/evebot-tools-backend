@@ -1,15 +1,14 @@
 package tasks
 
 import (
-	"fmt"
 	"github.com/hibiken/asynq"
 )
 
 var (
-	ESI_STANDARD   = GetQueueOpts("esi", "standard", 5)
-	ESI_BACKGROUND = GetQueueOpts("esi", "background", 1)
-	ESI_HIGH       = GetQueueOpts("esi", "high", 10)
-	ESI_REALTIME   = GetQueueOpts("esi", "realtime", 20)
+	BACKGROUND_QUEUE = GetQueueOpts("background", 1)
+	STANDARD_QUEUE   = GetQueueOpts("standard", 2)
+	CRITICAL_QUEUE   = GetQueueOpts("high", 3)
+	REALTIME_QUEUE   = GetQueueOpts("realtime", 4)
 )
 
 type QueueOpts struct {
@@ -17,10 +16,9 @@ type QueueOpts struct {
 	Priority int // 1 = low, 2 = normal, 3 = high
 }
 
-func GetQueueOpts(group, name string, priority int) QueueOpts {
-	q := fmt.Sprintf("%s_%s", group, name)
+func GetQueueOpts(name string, priority int) QueueOpts {
 	return QueueOpts{
-		Name:     q,
+		Name:     name,
 		Priority: priority,
 	}
 }

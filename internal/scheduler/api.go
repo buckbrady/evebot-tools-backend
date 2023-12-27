@@ -34,7 +34,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create status task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_STANDARD.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.STANDARD_QUEUE.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -45,7 +45,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create races task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_BACKGROUND.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.BACKGROUND_QUEUE.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -56,7 +56,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create ancestries task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_BACKGROUND.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.BACKGROUND_QUEUE.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -67,7 +67,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create factions task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_BACKGROUND.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.BACKGROUND_QUEUE.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -78,7 +78,7 @@ func startApi() {
 			log.Err(err).Msg("failed to create bloodlines task")
 			return
 		}
-		task, err := queueClient.Enqueue(t, tasks.ESI_BACKGROUND.GetQueue())
+		task, err := queueClient.Enqueue(t, tasks.BACKGROUND_QUEUE.GetQueue())
 		writeResponse(w, fmt.Sprintf("enqueued task %s", task.ID), err)
 
 	})
@@ -100,6 +100,23 @@ func startApi() {
 	})
 	r.Get("/universe/categories", func(w http.ResponseWriter, r *http.Request) {
 		scheduleUniverseCategoriesJob()
+		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
+
+	})
+
+	// Market
+	r.Get("/market/groups", func(w http.ResponseWriter, r *http.Request) {
+		scheduleMarketGroupsJob()
+		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
+
+	})
+	r.Get("/market/history", func(w http.ResponseWriter, r *http.Request) {
+		scheduleMarketHistoryTask()
+		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
+
+	})
+	r.Get("/market/orders", func(w http.ResponseWriter, r *http.Request) {
+		scheduleMarketOrdersTask()
 		writeResponse(w, fmt.Sprintf("enqueued task"), nil)
 
 	})

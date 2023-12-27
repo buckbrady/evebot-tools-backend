@@ -35,12 +35,12 @@ func Run() {
 			Concurrency: currencyCount,
 			// Optionally specify multiple queues with different priority.
 			Queues: map[string]int{
-				tasks.ESI_STANDARD.GetName():   tasks.ESI_STANDARD.GetPriority(),
-				tasks.ESI_BACKGROUND.GetName(): tasks.ESI_BACKGROUND.GetPriority(),
-				tasks.ESI_HIGH.GetName():       tasks.ESI_HIGH.GetPriority(),
-				tasks.ESI_REALTIME.GetName():   tasks.ESI_REALTIME.GetPriority(),
+				tasks.STANDARD_QUEUE.GetName():   tasks.STANDARD_QUEUE.GetPriority(),
+				tasks.BACKGROUND_QUEUE.GetName(): tasks.BACKGROUND_QUEUE.GetPriority(),
+				tasks.CRITICAL_QUEUE.GetName():   tasks.CRITICAL_QUEUE.GetPriority(),
+				tasks.REALTIME_QUEUE.GetName():   tasks.REALTIME_QUEUE.GetPriority(),
 			},
-			StrictPriority: true,
+			//StrictPriority: true,
 			// See the godoc for other configuration options
 		},
 	)
@@ -68,6 +68,10 @@ func Run() {
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseGroups, tasks.HandleCronJobUniverseGroupsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseSystemJumps, tasks.HandleCronJobUniverseSystemJumpsTask)
 	mux.HandleFunc(tasks.TypeCronJobEsiUniverseSystemKills, tasks.HandleCronJobUniverseSystemKillsTask)
+	// ESI Market
+	mux.HandleFunc(tasks.TypeCronJobEsiMarketGroups, tasks.HandleCronJobMarketGroupsTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiMarketPrices, tasks.HandleCronJobMarketPricesTask)
+	mux.HandleFunc(tasks.TypeCronJobEsiMarketHistory, tasks.HandleCronJobMarketHistoryTask)
 
 	if err := srv.Run(mux); err != nil {
 		log.Fatal().Msgf("could not run server: %v", err)

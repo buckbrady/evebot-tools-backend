@@ -59,7 +59,7 @@ func HandleCronJobUniverseSystemsTask(ctx context.Context, t *asynq.Task) error 
 	if err != nil {
 		return err
 	}
-	entryIDStar, err := queueClient.Enqueue(taskStar, ESI_BACKGROUND.GetQueue())
+	entryIDStar, err := queueClient.Enqueue(taskStar, BACKGROUND_QUEUE.GetQueue())
 	if err != nil {
 		return err
 	}
@@ -71,7 +71,7 @@ func HandleCronJobUniverseSystemsTask(ctx context.Context, t *asynq.Task) error 
 			log.Err(err).Any("planetID", planet.PlanetId).Msg("failed to create universe planet task")
 			return err
 		}
-		entryID, err := queueClient.Enqueue(task, ESI_BACKGROUND.GetQueue())
+		entryID, err := queueClient.Enqueue(task, BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Any("planetID", planet.PlanetId).Msg("failed to register universe planet task")
 			return err
@@ -84,7 +84,7 @@ func HandleCronJobUniverseSystemsTask(ctx context.Context, t *asynq.Task) error 
 				log.Err(err).Any("asteroidBeltID", asteroidBelt).Msg("failed to create universe asteroid belt task")
 				return err
 			}
-			entryIDBelt, err := queueClient.Enqueue(taskBelt, ESI_BACKGROUND.GetQueue())
+			entryIDBelt, err := queueClient.Enqueue(taskBelt, BACKGROUND_QUEUE.GetQueue())
 			if err != nil {
 				log.Err(err).Any("asteroidBeltID", asteroidBelt).Msg("failed to register universe asteroid belt task")
 				return err
@@ -98,7 +98,7 @@ func HandleCronJobUniverseSystemsTask(ctx context.Context, t *asynq.Task) error 
 				log.Err(err).Any("moonID", moon).Msg("failed to create universe moon task")
 				return err
 			}
-			entryIDMoon, err := queueClient.Enqueue(taskMoon, ESI_BACKGROUND.GetQueue())
+			entryIDMoon, err := queueClient.Enqueue(taskMoon, BACKGROUND_QUEUE.GetQueue())
 			if err != nil {
 				log.Err(err).Any("moonID", moon).Msg("failed to register universe moon task")
 				return err
@@ -113,7 +113,7 @@ func HandleCronJobUniverseSystemsTask(ctx context.Context, t *asynq.Task) error 
 			log.Err(err).Any("stargateID", stargate).Msg("failed to create universe stargate task")
 			return err
 		}
-		entryIDStargate, err := queueClient.Enqueue(taskStargate, ESI_BACKGROUND.GetQueue())
+		entryIDStargate, err := queueClient.Enqueue(taskStargate, BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Any("stargateID", stargate).Msg("failed to register universe stargate task")
 			return err
@@ -127,7 +127,7 @@ func HandleCronJobUniverseSystemsTask(ctx context.Context, t *asynq.Task) error 
 			log.Err(err).Any("stationID", station).Msg("failed to create universe station task")
 			return err
 		}
-		entryIDStation, err := queueClient.Enqueue(taskStation, ESI_BACKGROUND.GetQueue())
+		entryIDStation, err := queueClient.Enqueue(taskStation, BACKGROUND_QUEUE.GetQueue())
 		if err != nil {
 			log.Err(err).Any("stationID", station).Msg("failed to register universe station task")
 			return err
