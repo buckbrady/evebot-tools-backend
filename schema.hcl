@@ -1055,9 +1055,6 @@ table "market_orders" {
   column "min_volume" {
     type = int
   }
-  column "system_id" {
-    type = int
-  }
   column "last_updated" {
     type = timestamptz
   }
@@ -1077,12 +1074,6 @@ table "market_orders" {
   foreign_key "region_id" {
     columns     = [column.region_id]
     ref_columns = [table.universe_region.column.id]
-    on_update   = CASCADE
-    on_delete   = CASCADE
-  }
-  foreign_key "system_id" {
-    columns     = [column.system_id]
-    ref_columns = [table.universe_system.column.id]
     on_update   = CASCADE
     on_delete   = CASCADE
   }

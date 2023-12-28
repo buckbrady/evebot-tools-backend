@@ -39,7 +39,6 @@ func newMarketOrder(db *gorm.DB, opts ...gen.DOOption) marketOrder {
 	_marketOrder.Issued = field.NewTime(tableName, "issued")
 	_marketOrder.Duration = field.NewInt32(tableName, "duration")
 	_marketOrder.MinVolume = field.NewInt32(tableName, "min_volume")
-	_marketOrder.SystemID = field.NewInt32(tableName, "system_id")
 	_marketOrder.LastUpdated = field.NewTime(tableName, "last_updated")
 	_marketOrder.IsActive = field.NewBool(tableName, "is_active")
 
@@ -64,7 +63,6 @@ type marketOrder struct {
 	Issued       field.Time
 	Duration     field.Int32
 	MinVolume    field.Int32
-	SystemID     field.Int32
 	LastUpdated  field.Time
 	IsActive     field.Bool
 
@@ -95,7 +93,6 @@ func (m *marketOrder) updateTableName(table string) *marketOrder {
 	m.Issued = field.NewTime(table, "issued")
 	m.Duration = field.NewInt32(table, "duration")
 	m.MinVolume = field.NewInt32(table, "min_volume")
-	m.SystemID = field.NewInt32(table, "system_id")
 	m.LastUpdated = field.NewTime(table, "last_updated")
 	m.IsActive = field.NewBool(table, "is_active")
 
@@ -124,7 +121,7 @@ func (m *marketOrder) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (m *marketOrder) fillFieldMap() {
-	m.fieldMap = make(map[string]field.Expr, 15)
+	m.fieldMap = make(map[string]field.Expr, 14)
 	m.fieldMap["id"] = m.ID
 	m.fieldMap["type_id"] = m.TypeID
 	m.fieldMap["region_id"] = m.RegionID
@@ -137,7 +134,6 @@ func (m *marketOrder) fillFieldMap() {
 	m.fieldMap["issued"] = m.Issued
 	m.fieldMap["duration"] = m.Duration
 	m.fieldMap["min_volume"] = m.MinVolume
-	m.fieldMap["system_id"] = m.SystemID
 	m.fieldMap["last_updated"] = m.LastUpdated
 	m.fieldMap["is_active"] = m.IsActive
 }
