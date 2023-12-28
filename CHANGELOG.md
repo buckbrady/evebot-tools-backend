@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/buckbrady/evebot-tools-backend/compare/v1.2.0...v1.2.1) (2023-12-28)
+
+
+### Bug Fixes
+
+* remove bad column in market orders ([f7cffcd](https://github.com/buckbrady/evebot-tools-backend/commit/f7cffcddbc094961a155db7c12e886c4a22a9776))
+* **tasks:** change market prices to standard queue ([f3dc7dd](https://github.com/buckbrady/evebot-tools-backend/commit/f3dc7dd8bca26e0f62ec617c2b72d788a1b51bdd))
+
 ## [1.2.0](https://github.com/buckbrady/evebot-tools-backend/compare/v1.1.0...v1.2.0) (2023-12-27)
 
 
