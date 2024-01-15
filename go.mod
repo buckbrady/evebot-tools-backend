@@ -14,7 +14,7 @@ require (
 	github.com/rs/zerolog v1.31.0
 	github.com/smartystreets/goconvey v1.8.1
 	gorm.io/driver/postgres v1.5.4
-	gorm.io/gen v0.3.24
+	gorm.io/gen v0.3.25
 	gorm.io/gorm v1.25.5
 	gorm.io/plugin/dbresolver v1.5.0
 )
