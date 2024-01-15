@@ -4,7 +4,7 @@ go 1.21.4
 
 require (
 	github.com/antihax/goesi v0.0.0-20231202031403-498c84423fe8
-	github.com/getsentry/sentry-go v0.25.0
+	github.com/getsentry/sentry-go v0.26.0
 	github.com/go-chi/chi/v5 v5.0.11
 	github.com/golang-module/carbon/v2 v2.2.14
 	github.com/gomodule/redigo v1.8.9
